@@ -1,12 +1,12 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 
 const NAV_LINKS = [
   { href: "/articles", label: "Articles" },
-  { href: "/chat", label: "Chatbox" },
+  { href: "/chat", label: "Chat" },
   { href: "/download", label: "Download App" },
-  { href: "#more", label: "More" },
 ];
 
 function MenuIcon() {
@@ -29,6 +29,7 @@ function CloseIcon() {
 }
 
 export default function Navbar() {
+  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -68,7 +69,11 @@ export default function Navbar() {
             <a
               key={l.href}
               href={l.href}
-              className="text-sm font-medium text-gray-600 hover:text-[#F46A6A] transition-colors duration-200"
+              className={`text-sm font-medium transition-colors duration-200 ${
+                pathname === l.href
+                  ? "text-[#F46A6A] border-b-2 border-[#F46A6A] pb-0.5"
+                  : "text-gray-600 hover:text-[#F46A6A]"
+              }`}
             >
               {l.label}
             </a>
@@ -78,7 +83,7 @@ export default function Navbar() {
         {/* Desktop buttons */}
         <div className="hidden md:flex items-center gap-3">
           <a
-            href="/auth"
+            href="/auth?mode=login"
             className="text-sm font-semibold text-[#F46A6A] px-5 py-2 rounded-full border border-[#F46A6A] hover:bg-rose-50 transition-colors duration-200"
           >
             Sign In
@@ -113,14 +118,18 @@ export default function Navbar() {
               key={l.href}
               href={l.href}
               onClick={() => setMenuOpen(false)}
-              className="text-sm font-medium text-gray-700 py-3 border-b border-gray-50 hover:text-[#F46A6A] transition-colors"
+              className={`text-sm font-medium py-3 border-b border-gray-50 transition-colors ${
+                pathname === l.href
+                  ? "text-[#F46A6A] bg-rose-50/50 rounded-lg px-2"
+                  : "text-gray-700 hover:text-[#F46A6A]"
+              }`}
             >
               {l.label}
             </a>
           ))}
           <div className="flex gap-3 pt-4">
             <a
-              href="/auth"
+              href="/auth?mode=login"
               className="flex-1 text-center text-sm font-semibold text-[#F46A6A] px-4 py-2.5 rounded-full border border-[#F46A6A] hover:bg-rose-50 transition-colors"
             >
               Sign In
