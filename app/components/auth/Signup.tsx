@@ -4,6 +4,7 @@ import { useState } from "react";
 
 interface SignupProps {
   onSwitch: () => void;
+  onSignup: (role: "client" | "midwife" | "") => void;
 }
 
 function UserIcon() {
@@ -70,7 +71,7 @@ function validateEmail(value: string): string {
   return "";
 }
 
-export default function Signup({ onSwitch }: SignupProps) {
+export default function Signup({ onSwitch, onSignup }: SignupProps) {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
   const [email, setEmail] = useState("");
@@ -86,30 +87,30 @@ export default function Signup({ onSwitch }: SignupProps) {
   }
 
   return (
-    <div className="w-full max-w-sm mx-auto px-4 py-4">
-      <h1 className="text-[1.85rem] font-bold text-gray-900 mb-0.5">Get Started Now</h1>
-      <p className="text-sm text-gray-500 mb-4">Let&apos;s create your account</p>
+    <div className="w-full">
+      <h1 className="text-2xl font-bold text-gray-900 leading-tight">Get Started Now</h1>
+      <p className="text-sm text-gray-500 mt-1 mb-5">Let&apos;s create your account</p>
 
       {/* Full Name */}
-      <div className="mb-3">
-        <label className="block text-xs font-medium text-gray-500 mb-1">Full Name</label>
+      <div className="mb-3.5">
+        <label className="block text-xs font-medium text-gray-500 mb-1.5">Full Name</label>
         <div className="relative">
-          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
+          <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400">
             <UserIcon />
           </span>
           <input
             type="text"
             placeholder="Full Name"
-            className="w-full rounded-xl border border-gray-200 py-2 pl-10 pr-4 text-sm text-gray-800 outline-none focus:border-[#F46A6A] transition-colors placeholder:text-gray-300"
+            className="w-full rounded-xl border border-gray-200 h-11 pl-11 pr-4 text-sm text-gray-800 outline-none focus:border-[#F46A6A] focus:ring-1 focus:ring-[#F46A6A]/20 transition-all placeholder:text-gray-300"
           />
         </div>
       </div>
 
       {/* Email */}
-      <div className="mb-3">
-        <label className="block text-xs font-medium text-gray-500 mb-1">Email</label>
+      <div className="mb-3.5">
+        <label className="block text-xs font-medium text-gray-500 mb-1.5">Email</label>
         <div className="relative">
-          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
+          <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400">
             <MailIcon />
           </span>
           <input
@@ -118,17 +119,17 @@ export default function Signup({ onSwitch }: SignupProps) {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             onBlur={() => setEmailError(validateEmail(email))}
-            className={`w-full rounded-xl border ${emailError ? "border-red-400" : "border-gray-200"} py-2 pl-10 pr-4 text-sm text-gray-800 outline-none focus:border-[#F46A6A] transition-colors placeholder:text-gray-300`}
+            className={`w-full rounded-xl border ${emailError ? "border-red-400" : "border-gray-200"} h-11 pl-11 pr-4 text-sm text-gray-800 outline-none focus:border-[#F46A6A] focus:ring-1 focus:ring-[#F46A6A]/20 transition-all placeholder:text-gray-300`}
           />
         </div>
         {emailError && <p className="text-xs text-red-500 mt-1">{emailError}</p>}
       </div>
 
       {/* Password */}
-      <div className="mb-3">
-        <label className="block text-xs font-medium text-gray-500 mb-1">Password</label>
+      <div className="mb-3.5">
+        <label className="block text-xs font-medium text-gray-500 mb-1.5">Password</label>
         <div className="relative">
-          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
+          <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400">
             <LockIcon />
           </span>
           <input
@@ -139,12 +140,12 @@ export default function Signup({ onSwitch }: SignupProps) {
               setPassword(e.target.value);
               setPasswordError(checkMatch(e.target.value, confirm));
             }}
-            className="w-full rounded-xl border border-gray-200 py-2 pl-10 pr-10 text-sm text-gray-800 outline-none focus:border-[#F46A6A] transition-colors placeholder:text-gray-300"
+            className="w-full rounded-xl border border-gray-200 h-11 pl-11 pr-11 text-sm text-gray-800 outline-none focus:border-[#F46A6A] focus:ring-1 focus:ring-[#F46A6A]/20 transition-all placeholder:text-gray-300"
           />
           <button
             type="button"
             onClick={() => setShowPassword((v) => !v)}
-            className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+            className="absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
           >
             {showPassword ? <EyeOffIcon /> : <EyeIcon />}
           </button>
@@ -153,9 +154,9 @@ export default function Signup({ onSwitch }: SignupProps) {
 
       {/* Confirm Password */}
       <div className="mb-4">
-        <label className="block text-xs font-medium text-gray-500 mb-1">Confirm Password</label>
+        <label className="block text-xs font-medium text-gray-500 mb-1.5">Confirm Password</label>
         <div className="relative">
-          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
+          <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400">
             <LockIcon />
           </span>
           <input
@@ -167,12 +168,12 @@ export default function Signup({ onSwitch }: SignupProps) {
               setPasswordError(checkMatch(password, e.target.value));
             }}
             onBlur={() => setPasswordError(checkMatch(password, confirm))}
-            className={`w-full rounded-xl border ${passwordError ? "border-red-400" : "border-gray-200"} py-2 pl-10 pr-10 text-sm text-gray-800 outline-none focus:border-[#F46A6A] transition-colors placeholder:text-gray-300`}
+            className={`w-full rounded-xl border ${passwordError ? "border-red-400" : "border-gray-200"} h-11 pl-11 pr-11 text-sm text-gray-800 outline-none focus:border-[#F46A6A] focus:ring-1 focus:ring-[#F46A6A]/20 transition-all placeholder:text-gray-300`}
           />
           <button
             type="button"
             onClick={() => setShowConfirm((v) => !v)}
-            className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+            className="absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
           >
             {showConfirm ? <EyeOffIcon /> : <EyeIcon />}
           </button>
@@ -187,7 +188,7 @@ export default function Signup({ onSwitch }: SignupProps) {
           <button
             type="button"
             onClick={() => setRole("client")}
-            className={`flex-1 py-2 rounded-xl border text-sm font-medium transition-colors ${
+            className={`flex-1 h-11 rounded-xl border text-sm font-medium transition-colors ${
               role === "client"
                 ? "bg-[#F46A6A] border-[#F46A6A] text-white"
                 : "border-gray-200 text-gray-600 hover:border-[#F46A6A] hover:text-[#F46A6A]"
@@ -198,7 +199,7 @@ export default function Signup({ onSwitch }: SignupProps) {
           <button
             type="button"
             onClick={() => setRole("midwife")}
-            className={`flex-1 py-2 rounded-xl border text-sm font-medium transition-colors ${
+            className={`flex-1 h-11 rounded-xl border text-sm font-medium transition-colors ${
               role === "midwife"
                 ? "bg-[#F46A6A] border-[#F46A6A] text-white"
                 : "border-gray-200 text-gray-600 hover:border-[#F46A6A] hover:text-[#F46A6A]"
@@ -210,25 +211,28 @@ export default function Signup({ onSwitch }: SignupProps) {
       </div>
 
       {/* Sign up button */}
-      <button className="w-full bg-[#F46A6A] text-white rounded-full py-2.5 font-semibold text-sm hover:opacity-90 active:opacity-80 transition-opacity">
+      <button
+        onClick={() => onSignup(role)}
+        className="w-full bg-[#F46A6A] text-white rounded-full h-11 font-semibold text-sm hover:bg-[#e55d5d] active:bg-[#d45252] transition-colors"
+      >
         Sign up
       </button>
 
       {/* Divider */}
-      <div className="flex items-center my-3 gap-3">
+      <div className="flex items-center my-3.5 gap-3">
         <hr className="flex-1 border-gray-200" />
         <span className="text-xs text-gray-400">or</span>
         <hr className="flex-1 border-gray-200" />
       </div>
 
       {/* Google button */}
-      <button className="w-full rounded-full border border-gray-200 py-2 flex items-center justify-center gap-2.5 text-sm font-semibold text-gray-700 hover:bg-gray-50 active:bg-gray-100 transition-colors">
+      <button className="w-full rounded-full border border-gray-200 h-11 flex items-center justify-center gap-2.5 text-sm font-semibold text-gray-700 hover:bg-gray-50 active:bg-gray-100 transition-colors">
         <GoogleIcon />
         Sign up with Google
       </button>
 
       {/* Footer */}
-      <p className="text-center text-xs text-gray-500 mt-4">
+      <p className="text-center text-sm text-gray-500 mt-4">
         Already have an account?{" "}
         <button
           onClick={onSwitch}

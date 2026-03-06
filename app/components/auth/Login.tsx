@@ -67,15 +67,15 @@ export default function Login({ onSwitch }: LoginProps) {
   const [emailError, setEmailError] = useState("");
 
   return (
-    <div className="w-full max-w-sm mx-auto px-4 py-4">
-      <h1 className="text-[1.85rem] font-bold text-gray-900 mb-0.5">Welcome Back</h1>
-      <p className="text-sm text-gray-500 mb-5">Sign in to your account</p>
+    <div className="w-full">
+      <h1 className="text-2xl font-bold text-gray-900 leading-tight">Welcome Back</h1>
+      <p className="text-sm text-gray-500 mt-1 mb-5">Sign in to your account</p>
 
       {/* Email */}
-      <div className="mb-3">
-        <label className="block text-xs font-medium text-gray-500 mb-1">Email</label>
+      <div className="mb-3.5">
+        <label className="block text-xs font-medium text-gray-500 mb-1.5">Email</label>
         <div className="relative">
-          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
+          <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400">
             <MailIcon />
           </span>
           <input
@@ -84,28 +84,28 @@ export default function Login({ onSwitch }: LoginProps) {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             onBlur={() => setEmailError(validateEmail(email))}
-            className={`w-full rounded-xl border ${emailError ? "border-red-400" : "border-gray-200"} py-2 pl-10 pr-4 text-sm text-gray-800 outline-none focus:border-[#F46A6A] transition-colors placeholder:text-gray-300`}
+            className={`w-full rounded-xl border ${emailError ? "border-red-400" : "border-gray-200"} h-11 pl-11 pr-4 text-sm text-gray-800 outline-none focus:border-[#F46A6A] focus:ring-1 focus:ring-[#F46A6A]/20 transition-all placeholder:text-gray-300`}
           />
         </div>
         {emailError && <p className="text-xs text-red-500 mt-1">{emailError}</p>}
       </div>
 
       {/* Password */}
-      <div className="mb-3">
-        <label className="block text-xs font-medium text-gray-500 mb-1">Password</label>
+      <div className="mb-3.5">
+        <label className="block text-xs font-medium text-gray-500 mb-1.5">Password</label>
         <div className="relative">
-          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
+          <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400">
             <LockIcon />
           </span>
           <input
             type={showPassword ? "text" : "password"}
             placeholder="Enter your password"
-            className="w-full rounded-xl border border-gray-200 py-2 pl-10 pr-10 text-sm text-gray-800 outline-none focus:border-[#F46A6A] transition-colors placeholder:text-gray-300"
+            className="w-full rounded-xl border border-gray-200 h-11 pl-11 pr-11 text-sm text-gray-800 outline-none focus:border-[#F46A6A] focus:ring-1 focus:ring-[#F46A6A]/20 transition-all placeholder:text-gray-300"
           />
           <button
             type="button"
             onClick={() => setShowPassword((v) => !v)}
-            className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+            className="absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
           >
             {showPassword ? <EyeOffIcon /> : <EyeIcon />}
           </button>
@@ -127,25 +127,25 @@ export default function Login({ onSwitch }: LoginProps) {
       </div>
 
       {/* Sign in button */}
-      <button className="w-full bg-[#F46A6A] text-white rounded-full py-2.5 font-semibold text-sm hover:opacity-90 active:opacity-80 transition-opacity">
+      <button className="w-full bg-[#F46A6A] text-white rounded-full h-11 font-semibold text-sm hover:bg-[#e55d5d] active:bg-[#d45252] transition-colors">
         Sign in
       </button>
 
       {/* Divider */}
-      <div className="flex items-center my-3 gap-3">
+      <div className="flex items-center my-3.5 gap-3">
         <hr className="flex-1 border-gray-200" />
         <span className="text-xs text-gray-400">or</span>
         <hr className="flex-1 border-gray-200" />
       </div>
 
       {/* Google button */}
-      <button className="w-full rounded-full border border-gray-200 py-2 flex items-center justify-center gap-2.5 text-sm font-semibold text-gray-700 hover:bg-gray-50 active:bg-gray-100 transition-colors">
+      <button className="w-full rounded-full border border-gray-200 h-11 flex items-center justify-center gap-2.5 text-sm font-semibold text-gray-700 hover:bg-gray-50 active:bg-gray-100 transition-colors">
         <GoogleIcon />
         Sign in with Google
       </button>
 
       {/* Footer */}
-      <p className="text-center text-xs text-gray-500 mt-4">
+      <p className="text-center text-sm text-gray-500 mt-4">
         Don&apos;t have an account?{" "}
         <button
           onClick={onSwitch}

@@ -7,13 +7,13 @@ interface PanelProps {
 
 export default function Panel({ src }: PanelProps) {
   return (
-    <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
-      <div style={{ position: "relative", width: "calc(100% - 48px)", height: "calc(100% - 48px)" }}>
+    <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
+      <div className="relative w-full h-full" style={{ maxWidth: "480px", maxHeight: "480px" }}>
         <Image
           src={src}
           alt="Auth panel"
           fill
-          sizes="50vw"
+          sizes="(max-width: 1024px) 100vw, 55vw"
           style={{ objectFit: "contain" }}
           priority
         />
