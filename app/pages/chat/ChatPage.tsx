@@ -63,14 +63,13 @@ export default function ChatPage() {
   ]);
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
-  const messagesEndRef = useRef<HTMLDivElement>(null);
-
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
+  const messagesContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    scrollToBottom();
+    const container = messagesContainerRef.current;
+    if (container) {
+      container.scrollTop = container.scrollHeight;
+    }
   }, [messages, isTyping]);
 
   const handleSend = () => {
@@ -156,7 +155,7 @@ export default function ChatPage() {
               </div>
 
               {/* Messages area */}
-              <div className="flex-1 overflow-y-auto px-5 py-5 space-y-4" style={{ maxHeight: "400px" }}>
+              <div ref={messagesContainerRef} className="flex-1 overflow-y-auto px-5 py-5 space-y-4" style={{ maxHeight: "400px" }}>
                 {messages.map((msg) => (
                   <ChatMessage
                     key={msg.id}
@@ -184,7 +183,6 @@ export default function ChatPage() {
                     </div>
                   </div>
                 )}
-                <div ref={messagesEndRef} />
               </div>
 
               {/* Input area */}
