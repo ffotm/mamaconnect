@@ -45,7 +45,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
       )}
 
       <aside
-        className={`fixed top-0 left-0 z-50 h-screen w-[260px] bg-white border-r border-gray-100 flex flex-col transition-transform duration-300 lg:translate-x-0 ${
+        className={`fixed top-0 left-0 z-50 h-screen w-65 bg-white border-r border-gray-100 flex flex-col transition-transform duration-300 lg:translate-x-0 ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
@@ -54,10 +54,10 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
           <Link href="/admin" className="flex items-center gap-2">
             <span className="text-xl">🌸</span>
             <span className="font-bold text-xl text-gray-900">
-              Mama<span className="text-[#F46A6A]">Connect</span>
+              Mama<span className="text-[#F08080]">Connect</span>
             </span>
           </Link>
-          <button onClick={onClose} className="lg:hidden p-1.5 rounded-lg hover:bg-gray-100 transition-colors duration-200">
+          <button onClick={onClose} className="lg:hidden p-1.5 rounded-lg hover:bg-[#FFDAB9]/50 transition-colors duration-200">
             <IoClose size={20} className="text-gray-500" />
           </button>
         </div>
@@ -74,11 +74,11 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
                 onClick={onClose}
                 className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 ${
                   active
-                    ? "bg-rose-50 text-[#F46A6A]"
-                    : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+                    ? "bg-[#FFDAB9] text-[#F08080]"
+                    : "text-gray-600 hover:bg-[#FFDAB9]/40 hover:text-gray-900"
                 }`}
               >
-                <item.icon size={20} className={active ? "text-[#F46A6A]" : "text-gray-400"} />
+                <item.icon size={20} className={active ? "text-[#F08080]" : "text-gray-400"} />
                 {item.label}
               </Link>
             );
@@ -89,7 +89,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
         <div className="px-3 py-4 border-t border-gray-100">
           <button
             onClick={handleLogout}
-            className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-gray-600 hover:bg-rose-50 hover:text-[#F46A6A] transition-all duration-200 w-full"
+            className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-gray-600 hover:bg-[#FFDAB9] hover:text-[#F08080] transition-all duration-200 w-full"
           >
             <IoLogOutOutline size={20} className="text-gray-400" />
             Logout

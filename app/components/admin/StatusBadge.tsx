@@ -18,7 +18,7 @@ export default function StatusBadge({ status }: StatusBadgeProps) {
   const colorClass = statusColors[status.toLowerCase()] || "text-gray-600 bg-gray-100";
 
   return (
-    <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold tracking-wider uppercase capitalize ${colorClass}`}>
+    <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold tracking-wider uppercase ${colorClass}`}>
       {status}
     </span>
   );
