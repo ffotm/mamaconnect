@@ -4,7 +4,7 @@ import { useState } from "react";
 
 interface SignupProps {
   onSwitch: () => void;
-  onSignup: (role: "client" | "midwife" | "") => void;
+  onSignup: (role: "client" | "midwife" | "", name?: string, email?: string) => void;
 }
 
 function UserIcon() {
@@ -74,6 +74,7 @@ function validateEmail(value: string): string {
 export default function Signup({ onSwitch, onSignup }: SignupProps) {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
@@ -101,6 +102,8 @@ export default function Signup({ onSwitch, onSignup }: SignupProps) {
           <input
             type="text"
             placeholder="Full Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
             className="w-full rounded-xl border border-gray-200 h-11 pl-11 pr-4 text-sm text-gray-800 outline-none focus:border-[#F46A6A] focus:ring-1 focus:ring-[#F46A6A]/20 transition-all placeholder:text-gray-300"
           />
         </div>
@@ -212,7 +215,7 @@ export default function Signup({ onSwitch, onSignup }: SignupProps) {
 
       {/* Sign up button */}
       <button
-        onClick={() => onSignup(role)}
+        onClick={() => onSignup(role, name, email)}
         className="w-full bg-[#F46A6A] text-white rounded-full h-11 font-semibold text-sm hover:bg-[#e55d5d] active:bg-[#d45252] transition-colors"
       >
         Sign up

@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useAuth } from "@/app/components/auth/AuthContext";
 
 interface LoginProps {
   onSwitch: () => void;
@@ -64,7 +66,18 @@ function validateEmail(value: string): string {
 export default function Login({ onSwitch }: LoginProps) {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState("");
+  const router = useRouter();
+  const { login } = useAuth();
+
+  function handleLogin() {
+    const err = validateEmail(email);
+    if (err) { setEmailError(err); return; }
+    if (!password) return;
+    login(email);
+    router.push("/dashboard");
+  }
 
   return (
     <div className="w-full">
@@ -100,6 +113,8 @@ export default function Login({ onSwitch }: LoginProps) {
           <input
             type={showPassword ? "text" : "password"}
             placeholder="Enter your password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             className="w-full rounded-xl border border-gray-200 h-11 pl-11 pr-11 text-sm text-gray-800 outline-none focus:border-[#F46A6A] focus:ring-1 focus:ring-[#F46A6A]/20 transition-all placeholder:text-gray-300"
           />
           <button
@@ -127,7 +142,7 @@ export default function Login({ onSwitch }: LoginProps) {
       </div>
 
       {/* Sign in button */}
-      <button className="w-full bg-[#F46A6A] text-white rounded-full h-11 font-semibold text-sm hover:bg-[#e55d5d] active:bg-[#d45252] transition-colors">
+      <button onClick={handleLogin} className="w-full bg-[#F46A6A] text-white rounded-full h-11 font-semibold text-sm hover:bg-[#e55d5d] active:bg-[#d45252] transition-colors">
         Sign in
       </button>
 

@@ -1,11 +1,12 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 import Panel from "@/app/components/auth/Panel";
 import Signup from "@/app/components/auth/Signup";
 import Login from "@/app/components/auth/Login";
 import ClientProfileDetails from "@/app/components/auth/ClientProfileDetails";
+import { useAuth } from "@/app/components/auth/AuthContext";
 import panelLoginImg from "@/app/assets/panelLogin.png";
 import panelSignupImg from "@/app/assets/panelSignup.png";
 
@@ -22,7 +23,10 @@ type AuthView = "signup" | "login" | "clientProfile";
 
 export default function Auth() {
   const searchParams = useSearchParams();
+  const router = useRouter();
+  const { signup } = useAuth();
   const [view, setView] = useState<AuthView>("signup");
+  const [signupData, setSignupData] = useState<{ name: string; email: string }>({ name: "", email: "" });
 
   useEffect(() => {
     const mode = searchParams.get("mode");
@@ -34,12 +38,13 @@ export default function Auth() {
   const isLogin = view === "login";
   const isClientProfile = view === "clientProfile";
 
-  function handleSignup(role: "client" | "midwife" | "") {
+  function handleSignup(role: "client" | "midwife" | "", name?: string, email?: string) {
+    if (name) setSignupData({ name, email: email || "" });
     if (role === "client") {
       setView("clientProfile");
-    } else {
-      // For doctor/expert role, complete signup directly
-      // (future: navigate to dashboard or next step)
+    } else if (role === "midwife") {
+      signup(name || "Midwife", email || "", "midwife");
+      router.push("/dashboard");
     }
   }
 
@@ -49,9 +54,9 @@ export default function Auth() {
     allergies: string[];
     pregnancyStage: string;
   }) {
-    // Store profile data and continue registration
     console.log("Client profile data:", data);
-    // Future: send to API and redirect to dashboard
+    signup(signupData.name || "Mama", signupData.email || "", "client");
+    router.push("/dashboard");
   }
 
   return (
@@ -153,7 +158,7 @@ export default function Auth() {
             transition: "opacity 0.3s ease",
           }}
         >
-          <div className="w-full max-w-[420px]">
+          <div className="w-full max-w-105">
             {/* Signup form */}
             <div
               style={{
@@ -195,7 +200,7 @@ export default function Auth() {
             transition: "opacity 0.3s ease",
           }}
         >
-          <div className="w-full max-w-[420px]">
+          <div className="w-full max-w-105">
             <Login onSwitch={() => setView("signup")} />
           </div>
         </div>
