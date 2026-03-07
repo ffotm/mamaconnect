@@ -14,13 +14,14 @@ import {
   CalendarIcon,
   ShopIcon,
   ChatIcon,
+  TrackerIcon,
 } from "./icons";
 
 /* ═══════════════════════════════════════════════════════════
    TYPES
    ═══════════════════════════════════════════════════════════ */
 
-export type TabKey = "home" | "monitoring" | "booking" | "shop" | "chat";
+export type TabKey = "home" | "monitoring" | "booking" | "shop" | "chat" | "tracker";
 
 export interface Midwife {
   id: number;
@@ -179,6 +180,7 @@ export const USER_PROFILE = {
 export const SIDEBAR_TABS: { key: TabKey; label: string; icon: React.ReactNode }[] = [
   { key: "home", label: "Dashboard", icon: <DashboardIcon /> },
   { key: "monitoring", label: "Monitoring", icon: <MonitorIcon /> },
+  { key: "tracker", label: "Tracker", icon: <TrackerIcon /> },
   { key: "booking", label: "Booking", icon: <CalendarIcon /> },
   { key: "shop", label: "Shop", icon: <ShopIcon /> },
   { key: "chat", label: "Chat", icon: <ChatIcon /> },
@@ -191,3 +193,65 @@ export const SIDEBAR_TABS: { key: TabKey; label: string; icon: React.ReactNode }
 export function getInitials(name: string) {
   return name.split(" ").map((n) => n[0]).join("").slice(0, 2).toUpperCase();
 }
+
+/* ═══════════════════════════════════════════════════════════
+   APPOINTMENT REMINDERS
+   ═══════════════════════════════════════════════════════════ */
+
+export const APPOINTMENT_REMINDERS = [
+  {
+    id: 1,
+    title: "First Prenatal Check-up",
+    date: "March 15, 2026",
+    daysUntil: 8,
+    doctor: "Dr. Sarah Benali",
+    type: "Clinic Visit",
+    urgent: false,
+  },
+  {
+    id: 2,
+    title: "First Trimester Ultrasound",
+    date: "March 28, 2026",
+    daysUntil: 21,
+    doctor: "Dr. Fatima Ndiaye",
+    type: "Scan",
+    urgent: false,
+  },
+  {
+    id: 3,
+    title: "Blood Tests (Routine Panel)",
+    date: "March 12, 2026",
+    daysUntil: 5,
+    doctor: "Laboratory",
+    type: "Lab Work",
+    urgent: true,
+  },
+];
+
+/* ═══════════════════════════════════════════════════════════
+   WEEKLY HEALTH TIPS
+   ═══════════════════════════════════════════════════════════ */
+
+export const WEEKLY_TIPS = [
+  {
+    category: "Nutrition",
+    color: "from-emerald-400 to-teal-500",
+    bgColor: "bg-emerald-50",
+    textColor: "text-emerald-700",
+    tip: "Increase folic acid intake. Aim for 400–800 mcg daily to support your baby's neural tube development this week.",
+  },
+  {
+    category: "Wellness",
+    color: "from-violet-400 to-purple-500",
+    bgColor: "bg-violet-50",
+    textColor: "text-violet-700",
+    tip: "Morning sickness peaks around week 7–9. Eat small, frequent meals and keep ginger tea or crackers nearby.",
+  },
+  {
+    category: "Activity",
+    color: "from-blue-400 to-cyan-500",
+    bgColor: "bg-blue-50",
+    textColor: "text-blue-700",
+    tip: "Gentle walking for 20–30 minutes daily boosts circulation and mood without overtaxing your body in early pregnancy.",
+  },
+];

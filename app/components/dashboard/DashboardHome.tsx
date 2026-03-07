@@ -8,6 +8,8 @@ import {
   DAYS_TO_GO,
   SERVICE_ITEMS,
   serviceIcons,
+  APPOINTMENT_REMINDERS,
+  WEEKLY_TIPS,
 } from "./data";
 import { ChevronRightIcon } from "./icons";
 
@@ -24,9 +26,11 @@ interface DashboardHomeProps {
   greeting: string;
   userName: string;
   onGoToShop?: () => void;
+  onGoToTracker?: () => void;
+  onGoToBooking?: () => void;
 }
 
-export default function DashboardHome({ greeting, userName, onGoToShop }: DashboardHomeProps) {
+export default function DashboardHome({ greeting, userName, onGoToShop, onGoToTracker, onGoToBooking }: DashboardHomeProps) {
   const router = useRouter();
 
   function handleServiceClick(label: string) {
@@ -71,6 +75,14 @@ export default function DashboardHome({ greeting, userName, onGoToShop }: Dashbo
                   <p className="text-[11px] uppercase tracking-wider text-gray-500 font-medium mb-0.5">Remaining</p>
                   <p className="text-xl font-extrabold text-gray-900">{DAYS_TO_GO}<span className="text-sm font-medium text-gray-500 ml-1">Days to Go</span></p>
                 </div>
+                {onGoToTracker && (
+                  <button
+                    onClick={onGoToTracker}
+                    className="bg-[#F46A6A] text-white rounded-2xl px-5 py-3 shadow-sm text-sm font-semibold hover:bg-[#e55d5d] transition-all duration-200 hover:shadow-md cursor-pointer"
+                  >
+                    View Week {PREGNANCY_WEEK} Details →
+                  </button>
+                )}
               </div>
             </div>
 
@@ -125,6 +137,72 @@ export default function DashboardHome({ greeting, userName, onGoToShop }: Dashbo
                   <ChevronRightIcon />
                 </div>
               </button>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Personalised Health Tips */}
+      <section className="pb-8 sm:pb-10">
+        <div className="max-w-6xl mx-auto px-6 sm:px-8">
+          <div className="flex items-center justify-between mb-6">
+            <div>
+              <h2 className="text-xl font-bold text-gray-900">Your Health Tips This Week</h2>
+              <p className="text-sm text-gray-500 mt-0.5">Personalised for Week {PREGNANCY_WEEK} of your pregnancy</p>
+            </div>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            {WEEKLY_TIPS.map((tip) => (
+              <div key={tip.category} className={`${tip.bgColor} rounded-2xl p-5`}>
+                <span className={`inline-block text-[10px] font-bold uppercase tracking-wider ${tip.textColor} mb-3`}>{tip.category}</span>
+                <p className="text-sm text-gray-700 leading-relaxed">{tip.tip}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Appointment Reminders */}
+      <section className="pb-10 sm:pb-12">
+        <div className="max-w-6xl mx-auto px-6 sm:px-8">
+          <div className="flex items-center justify-between mb-6">
+            <div>
+              <h2 className="text-xl font-bold text-gray-900">Upcoming Appointments</h2>
+              <p className="text-sm text-gray-500 mt-0.5">Your next prenatal visits and check-ups</p>
+            </div>
+            {onGoToBooking && (
+              <button
+                onClick={onGoToBooking}
+                className="text-sm font-semibold text-[#F46A6A] hover:text-[#e55d5d] transition-colors cursor-pointer"
+              >
+                + Book New
+              </button>
+            )}
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            {APPOINTMENT_REMINDERS.map((apt) => (
+              <div
+                key={apt.id}
+                className={`bg-white rounded-2xl p-5 border shadow-sm ${apt.urgent ? "border-[#F46A6A]/30" : "border-gray-100"}`}
+              >
+                {apt.urgent && (
+                  <span className="inline-block text-[10px] font-bold uppercase tracking-wider text-[#F46A6A] bg-rose-50 px-2 py-0.5 rounded-full mb-2">
+                    Coming Soon
+                  </span>
+                )}
+                <h3 className="font-semibold text-gray-900 text-sm mb-1">{apt.title}</h3>
+                <p className="text-xs text-gray-500 mb-3">{apt.doctor}</p>
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-xs text-gray-400">{apt.type}</p>
+                    <p className="text-sm font-semibold text-gray-700">{apt.date}</p>
+                  </div>
+                  <div className={`text-right ${apt.daysUntil <= 7 ? "text-[#F46A6A]" : "text-gray-400"}`}>
+                    <p className="text-lg font-extrabold leading-none">{apt.daysUntil}</p>
+                    <p className="text-[10px]">days away</p>
+                  </div>
+                </div>
+              </div>
             ))}
           </div>
         </div>
