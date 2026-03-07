@@ -56,32 +56,32 @@ export default function AdminDashboard() {
       value: stats.totalUsers,
       change: "+12%",
       icon: IoPeopleOutline,
-      lightColor: "bg-rose-50",
-      iconColor: "text-[#F46A6A]",
+      lightColor: "bg-[#FFDAB9]",
+      iconColor: "text-[#F08080]",
     },
     {
       label: "Total Midwives",
       value: stats.totalMidwives,
       change: "+8%",
       icon: IoMedkitOutline,
-      lightColor: "bg-rose-50",
-      iconColor: "text-[#F46A6A]",
+      lightColor: "bg-[#FFDAB9]",
+      iconColor: "text-[#F08080]",
     },
     {
       label: "Total Articles",
       value: stats.totalArticles,
       change: "+15%",
       icon: IoDocumentTextOutline,
-      lightColor: "bg-rose-50",
-      iconColor: "text-[#F46A6A]",
+      lightColor: "bg-[#FFDAB9]",
+      iconColor: "text-[#F08080]",
     },
     {
       label: "New Users This Week",
       value: stats.newUsersThisWeek,
       change: "+5%",
       icon: IoTrendingUpOutline,
-      lightColor: "bg-rose-50",
-      iconColor: "text-[#F46A6A]",
+      lightColor: "bg-[#FFDAB9]",
+      iconColor: "text-[#F08080]",
     },
   ];
 
@@ -101,10 +101,10 @@ export default function AdminDashboard() {
             className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group"
           >
             <div className="flex items-center justify-between mb-4">
-              <div className={`w-12 h-12 rounded-xl ${card.lightColor} flex items-center justify-center ${card.iconColor} group-hover:bg-[#F46A6A] group-hover:text-white transition-colors duration-300`}>
+              <div className={`w-12 h-12 rounded-xl ${card.lightColor} flex items-center justify-center ${card.iconColor} group-hover:bg-[#F08080] group-hover:text-white transition-colors duration-300`}>
                 <card.icon size={24} />
               </div>
-              <span className="inline-flex items-center gap-1 text-xs font-semibold text-[#F46A6A] bg-rose-50 px-2.5 py-0.5 rounded-full">
+              <span className="inline-flex items-center gap-1 text-xs font-semibold text-[#F08080] bg-[#FFDAB9] px-2.5 py-0.5 rounded-full">
                 <IoArrowUpOutline size={12} />
                 {card.change}
               </span>
@@ -128,8 +128,8 @@ export default function AdminDashboard() {
               <AreaChart data={userGrowthData}>
                 <defs>
                   <linearGradient id="userGradient" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stopColor="#F46A6A" stopOpacity={0.2} />
-                    <stop offset="100%" stopColor="#F46A6A" stopOpacity={0} />
+                    <stop offset="0%" stopColor="#F08080" stopOpacity={0.2} />
+                    <stop offset="100%" stopColor="#F08080" stopOpacity={0} />
                   </linearGradient>
                 </defs>
                 <CartesianGrid strokeDasharray="3 3" stroke="#f3f4f6" />
@@ -146,7 +146,7 @@ export default function AdminDashboard() {
                 <Area
                   type="monotone"
                   dataKey="users"
-                  stroke="#F46A6A"
+                  stroke="#F08080"
                   strokeWidth={2.5}
                   fill="url(#userGradient)"
                 />
@@ -175,8 +175,8 @@ export default function AdminDashboard() {
                     fontSize: "13px",
                   }}
                 />
-                <Bar dataKey="published" fill="#F46A6A" radius={[6, 6, 0, 0]} maxBarSize={28} />
-                <Bar dataKey="drafts" fill="#fecdd3" radius={[6, 6, 0, 0]} maxBarSize={28} />
+                <Bar dataKey="published" fill="#F08080" radius={[6, 6, 0, 0]} maxBarSize={28} />
+                <Bar dataKey="drafts" fill="#FBC4AB" radius={[6, 6, 0, 0]} maxBarSize={28} />
               </BarChart>
             </ResponsiveContainer>
           </div>
@@ -189,8 +189,8 @@ export default function AdminDashboard() {
         <div className="space-y-4">
           {recentActivity.map((item, idx) => (
             <div key={idx} className="flex items-center gap-4">
-              <div className="w-10 h-10 rounded-full bg-rose-50 flex items-center justify-center shrink-0">
-                <span className="text-[#F46A6A] font-semibold text-xs">
+              <div className="w-10 h-10 rounded-full bg-[#FFDAB9] flex items-center justify-center shrink-0">
+                <span className="text-[#F08080] font-semibold text-xs">
                   {item.name.split(" ").map((n) => n[0]).join("")}
                 </span>
               </div>
