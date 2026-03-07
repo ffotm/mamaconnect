@@ -11,6 +11,7 @@ import DownloadSection from "@/app/components/landing/DownloadSection";
 import Testimonials from "@/app/components/landing/Testimonials";
 import CallToAction from "@/app/components/landing/CallToAction";
 import Footer from "@/app/components/landing/Footer";
+import LandingChatWidget from "@/app/components/landing/LandingChatWidget";
 
 export default function LandingPage() {
   const { user, isLoading } = useAuth();
@@ -43,6 +44,7 @@ export default function LandingPage() {
       <Testimonials />
       <CallToAction />
       <Footer />
+      <LandingChatWidget />
     </main>
   );
 }
