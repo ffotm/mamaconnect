@@ -1,8 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Navbar from "@/app/components/landing/Navbar";
-import Footer from "@/app/components/landing/Footer";
 import ArticleCard from "@/app/components/articles/ArticleCard";
 
 const CATEGORIES = ["All", "Pregnancy Health", "Nutrition", "Baby Development", "Mental Wellness"];
@@ -87,11 +85,24 @@ export default function ArticlesPage() {
 
   return (
     <>
-      <Navbar />
+      {/* Back to Dashboard */}
+      <div className="bg-white border-b border-gray-100">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+          <a
+            href="/dashboard"
+            className="inline-flex items-center gap-2 text-sm font-medium text-gray-600 hover:text-[#F46A6A] transition-colors duration-200"
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="15 18 9 12 15 6" />
+            </svg>
+            Back to Dashboard
+          </a>
+        </div>
+      </div>
 
       {/* Hero */}
       <section
-        className="relative pt-24 pb-16 sm:pt-28 sm:pb-20 overflow-hidden"
+        className="relative pt-10 pb-16 sm:pt-14 sm:pb-20 overflow-hidden"
         style={{ background: "linear-gradient(135deg, #fff5f5 0%, #ffe0e0 50%, #fecdd3 100%)" }}
       >
         <div className="absolute top-10 right-10 w-72 h-72 bg-[#F46A6A]/10 rounded-full blur-3xl pointer-events-none" />
@@ -243,8 +254,6 @@ export default function ArticlesPage() {
           </div>
         </div>
       </section>
-
-      <Footer />
     </>
   );
 }

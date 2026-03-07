@@ -15,7 +15,7 @@ export default function FeaturedArticle({
     <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
       <div className="bg-white rounded-3xl overflow-hidden shadow-md border border-gray-100 hover:shadow-lg transition-shadow duration-300 group">
         <div className="flex flex-col lg:flex-row">
-          <div className="lg:w-1/2 h-64 lg:h-auto bg-gradient-to-br from-rose-50 via-pink-100 to-rose-100 flex items-center justify-center">
+          <div className="lg:w-1/2 h-64 lg:h-auto bg-linear-to-br from-rose-50 via-pink-100 to-rose-100 flex items-center justify-center">
             <span className="text-8xl group-hover:scale-105 transition-transform duration-300">
               {image}
             </span>

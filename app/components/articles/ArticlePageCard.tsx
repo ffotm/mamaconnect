@@ -13,7 +13,7 @@ export default function ArticlePageCard({
 }: ArticlePageCardProps) {
   return (
     <div className="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group">
-      <div className="h-48 bg-gradient-to-br from-rose-50 to-pink-100 flex items-center justify-center overflow-hidden">
+      <div className="h-48 bg-linear-to-br from-rose-50 to-pink-100 flex items-center justify-center overflow-hidden">
         <span className="text-5xl group-hover:scale-110 transition-transform duration-300">
           {image}
         </span>
