@@ -20,9 +20,9 @@ export default function SettingsPage() {
   ];
 
   const [profileForm, setProfileForm] = useState({
-    name: "Blessing Okafor",
-    email: "blessing@mamaconnect.com",
-    phone: "+234 801 234 5678",
+    name: "Nadia Boudiaf",
+    email: "nadia.boudiaf@mamaconnect.dz",
+    phone: "+213 550 987 654",
     bio: "Platform administrator for MamaConnect.",
   });
 
@@ -58,11 +58,11 @@ export default function SettingsPage() {
                 onClick={() => setActiveTab(tab.id)}
                 className={`flex items-center gap-3 w-full px-3 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 ${
                   activeTab === tab.id
-                    ? "bg-rose-50 text-[#F46A6A]"
-                    : "text-gray-600 hover:bg-gray-50"
+                    ? "bg-[#FFDAB9] text-[#F08080]"
+                    : "text-gray-600 hover:bg-[#FFDAB9]/40"
                 }`}
               >
-                <tab.icon size={18} className={activeTab === tab.id ? "text-[#F46A6A]" : "text-gray-400"} />
+                <tab.icon size={18} className={activeTab === tab.id ? "text-[#F08080]" : "text-gray-400"} />
                 {tab.label}
               </button>
             ))}
@@ -81,7 +81,7 @@ export default function SettingsPage() {
                     type="text"
                     value={profileForm.name}
                     onChange={(e) => setProfileForm({ ...profileForm, name: e.target.value })}
-                    className="w-full rounded-xl border border-gray-200 h-11 px-4 text-sm text-gray-800 outline-none focus:border-[#F46A6A] focus:ring-1 focus:ring-[#F46A6A]/20 transition-all placeholder:text-gray-300"
+                    className="w-full rounded-xl border border-gray-200 h-11 px-4 text-sm text-gray-800 outline-none focus:border-[#F08080] focus:ring-1 focus:ring-[#F08080]/20 transition-all placeholder:text-gray-300"
                   />
                 </div>
                 <div>
@@ -90,7 +90,7 @@ export default function SettingsPage() {
                     type="email"
                     value={profileForm.email}
                     onChange={(e) => setProfileForm({ ...profileForm, email: e.target.value })}
-                    className="w-full rounded-xl border border-gray-200 h-11 px-4 text-sm text-gray-800 outline-none focus:border-[#F46A6A] focus:ring-1 focus:ring-[#F46A6A]/20 transition-all placeholder:text-gray-300"
+                    className="w-full rounded-xl border border-gray-200 h-11 px-4 text-sm text-gray-800 outline-none focus:border-[#F08080] focus:ring-1 focus:ring-[#F08080]/20 transition-all placeholder:text-gray-300"
                   />
                 </div>
                 <div>
@@ -99,7 +99,7 @@ export default function SettingsPage() {
                     type="tel"
                     value={profileForm.phone}
                     onChange={(e) => setProfileForm({ ...profileForm, phone: e.target.value })}
-                    className="w-full rounded-xl border border-gray-200 h-11 px-4 text-sm text-gray-800 outline-none focus:border-[#F46A6A] focus:ring-1 focus:ring-[#F46A6A]/20 transition-all placeholder:text-gray-300"
+                    className="w-full rounded-xl border border-gray-200 h-11 px-4 text-sm text-gray-800 outline-none focus:border-[#F08080] focus:ring-1 focus:ring-[#F08080]/20 transition-all placeholder:text-gray-300"
                   />
                 </div>
                 <div>
@@ -108,12 +108,12 @@ export default function SettingsPage() {
                     value={profileForm.bio}
                     onChange={(e) => setProfileForm({ ...profileForm, bio: e.target.value })}
                     rows={3}
-                    className="w-full rounded-xl border border-gray-200 px-4 py-3 text-sm text-gray-800 outline-none focus:border-[#F46A6A] focus:ring-1 focus:ring-[#F46A6A]/20 transition-all resize-none placeholder:text-gray-300"
+                    className="w-full rounded-xl border border-gray-200 px-4 py-3 text-sm text-gray-800 outline-none focus:border-[#F08080] focus:ring-1 focus:ring-[#F08080]/20 transition-all resize-none placeholder:text-gray-300"
                   />
                 </div>
                 <button
                   onClick={handleSaveProfile}
-                  className="px-5 py-2.5 rounded-full bg-[#F46A6A] text-white text-sm font-semibold hover:bg-[#e55d5d] active:bg-[#d45252] transition-colors shadow-sm hover:shadow-md"
+                  className="px-5 py-2.5 rounded-full bg-[#F08080] text-white text-sm font-semibold hover:bg-[#e07070] active:bg-[#d06060] transition-colors shadow-sm hover:shadow-md"
                 >
                   Save Changes
                 </button>
@@ -129,7 +129,7 @@ export default function SettingsPage() {
                   <label className="block text-xs font-medium text-gray-500 mb-1.5">Current Password</label>
                   <input
                     type="password"
-                    className="w-full rounded-xl border border-gray-200 h-11 px-4 text-sm text-gray-800 outline-none focus:border-[#F46A6A] focus:ring-1 focus:ring-[#F46A6A]/20 transition-all placeholder:text-gray-300"
+                    className="w-full rounded-xl border border-gray-200 h-11 px-4 text-sm text-gray-800 outline-none focus:border-[#F08080] focus:ring-1 focus:ring-[#F08080]/20 transition-all placeholder:text-gray-300"
                     placeholder="Enter current password"
                   />
                 </div>
@@ -137,7 +137,7 @@ export default function SettingsPage() {
                   <label className="block text-xs font-medium text-gray-500 mb-1.5">New Password</label>
                   <input
                     type="password"
-                    className="w-full rounded-xl border border-gray-200 h-11 px-4 text-sm text-gray-800 outline-none focus:border-[#F46A6A] focus:ring-1 focus:ring-[#F46A6A]/20 transition-all placeholder:text-gray-300"
+                    className="w-full rounded-xl border border-gray-200 h-11 px-4 text-sm text-gray-800 outline-none focus:border-[#F08080] focus:ring-1 focus:ring-[#F08080]/20 transition-all placeholder:text-gray-300"
                     placeholder="Enter new password"
                   />
                 </div>
@@ -145,13 +145,13 @@ export default function SettingsPage() {
                   <label className="block text-xs font-medium text-gray-500 mb-1.5">Confirm New Password</label>
                   <input
                     type="password"
-                    className="w-full rounded-xl border border-gray-200 h-11 px-4 text-sm text-gray-800 outline-none focus:border-[#F46A6A] focus:ring-1 focus:ring-[#F46A6A]/20 transition-all placeholder:text-gray-300"
+                    className="w-full rounded-xl border border-gray-200 h-11 px-4 text-sm text-gray-800 outline-none focus:border-[#F08080] focus:ring-1 focus:ring-[#F08080]/20 transition-all placeholder:text-gray-300"
                     placeholder="Confirm new password"
                   />
                 </div>
                 <button
                   onClick={() => toast.success("Password updated successfully")}
-                  className="px-5 py-2.5 rounded-full bg-[#F46A6A] text-white text-sm font-semibold hover:bg-[#e55d5d] active:bg-[#d45252] transition-colors shadow-sm hover:shadow-md"
+                  className="px-5 py-2.5 rounded-full bg-[#F08080] text-white text-sm font-semibold hover:bg-[#e07070] active:bg-[#d06060] transition-colors shadow-sm hover:shadow-md"
                 >
                   Update Password
                 </button>
@@ -164,7 +164,7 @@ export default function SettingsPage() {
                   <p className="text-sm text-gray-500 mb-3">
                     Add an extra layer of security to your account by enabling two-factor authentication.
                   </p>
-                  <button className="px-5 py-2.5 rounded-full border border-gray-200 text-sm font-semibold text-gray-700 hover:bg-gray-50 transition-colors">
+                  <button className="px-5 py-2.5 rounded-full border border-gray-200 text-sm font-semibold text-gray-700 hover:bg-[#FFDAB9]/40 transition-colors">
                     Enable 2FA
                   </button>
                 </div>
@@ -192,7 +192,7 @@ export default function SettingsPage() {
                         setNotifSettings({ ...notifSettings, [item.key]: !notifSettings[item.key] })
                       }
                       className={`relative w-11 h-6 rounded-full transition-colors ${
-                        notifSettings[item.key] ? "bg-[#F46A6A]" : "bg-gray-200"
+                        notifSettings[item.key] ? "bg-[#F08080]" : "bg-gray-200"
                       }`}
                     >
                       <span
@@ -205,7 +205,7 @@ export default function SettingsPage() {
                 ))}
                 <button
                   onClick={handleSaveNotifications}
-                  className="px-5 py-2.5 rounded-full bg-[#F46A6A] text-white text-sm font-semibold hover:bg-[#e55d5d] active:bg-[#d45252] transition-colors shadow-sm hover:shadow-md mt-4"
+                  className="px-5 py-2.5 rounded-full bg-[#F08080] text-white text-sm font-semibold hover:bg-[#e07070] active:bg-[#d06060] transition-colors shadow-sm hover:shadow-md mt-4"
                 >
                   Save Preferences
                 </button>
@@ -229,8 +229,8 @@ export default function SettingsPage() {
                         key={theme.label}
                         className={`px-4 py-2.5 rounded-full text-sm font-semibold transition-colors ${
                           theme.active
-                            ? "bg-[#F46A6A]/10 text-[#F46A6A] border border-[#F46A6A]"
-                            : "border border-gray-200 text-gray-600 hover:bg-gray-50"
+                            ? "bg-[#F08080]/10 text-[#F08080] border border-[#F08080]"
+                            : "border border-gray-200 text-gray-600 hover:bg-[#FFDAB9]/40"
                         }`}
                       >
                         {theme.label}
@@ -241,11 +241,11 @@ export default function SettingsPage() {
                 <div>
                   <p className="text-sm font-medium text-gray-900 mb-3">Accent Color</p>
                   <div className="flex gap-3">
-                    {["#F46A6A", "#3B82F6", "#8B5CF6", "#10B981", "#F59E0B"].map((color) => (
+                    {["#F08080", "#3B82F6", "#8B5CF6", "#10B981", "#F59E0B"].map((color) => (
                       <button
                         key={color}
                         className={`w-9 h-9 rounded-full border-2 transition-transform hover:scale-110 ${
-                          color === "#F46A6A" ? "border-gray-900 scale-110" : "border-transparent"
+                          color === "#F08080" ? "border-gray-900 scale-110" : "border-transparent"
                         }`}
                         style={{ backgroundColor: color }}
                       />
