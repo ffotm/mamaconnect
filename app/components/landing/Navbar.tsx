@@ -1,11 +1,17 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import { useAuth } from "@/app/components/auth/AuthContext";
 
-const NAV_LINKS = [
+const AUTH_NAV_LINKS = [
+  { href: "/dashboard", label: "Dashboard" },
   { href: "/articles", label: "Articles" },
-  { href: "/chat", label: "Chat" },
+  { href: "/download", label: "Download App" },
+];
+
+const PUBLIC_NAV_LINKS = [
+  { href: "/articles", label: "Articles" },
   { href: "/download", label: "Download App" },
 ];
 
@@ -30,8 +36,16 @@ function CloseIcon() {
 
 export default function Navbar() {
   const pathname = usePathname();
+  const router = useRouter();
+  const { user, logout } = useAuth();
+  const navLinks = user ? AUTH_NAV_LINKS : PUBLIC_NAV_LINKS;
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+
+  function handleLogout() {
+    logout();
+    router.push("/");
+  }
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -56,7 +70,7 @@ export default function Navbar() {
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         {/* Logo */}
-        <a href="/" className="flex items-center gap-2 select-none">
+        <a href={user ? "/dashboard" : "/"} className="flex items-center gap-2 select-none">
           <span className="text-2xl leading-none">🌸</span>
           <span className="font-bold text-xl text-gray-900 tracking-tight">
             Mama<span className="text-[#F46A6A]">Connect</span>
@@ -65,7 +79,7 @@ export default function Navbar() {
 
         {/* Desktop links */}
         <div className="hidden md:flex items-center gap-7">
-          {NAV_LINKS.map((l) => (
+          {navLinks.map((l) => (
             <a
               key={l.href}
               href={l.href}
@@ -82,18 +96,34 @@ export default function Navbar() {
 
         {/* Desktop buttons */}
         <div className="hidden md:flex items-center gap-3">
-          <a
-            href="/auth?mode=login"
-            className="text-sm font-semibold text-[#F46A6A] px-5 py-2 rounded-full border border-[#F46A6A] hover:bg-rose-50 transition-colors duration-200"
-          >
-            Sign In
-          </a>
-          <a
-            href="/auth"
-            className="text-sm font-semibold text-white bg-[#F46A6A] px-5 py-2 rounded-full hover:bg-[#e55d5d] transition-all duration-200 shadow-sm hover:shadow-md"
-          >
-            Get Started
-          </a>
+          {user ? (
+            <>
+              <span className="text-sm font-medium text-gray-700">
+                {user.name}
+              </span>
+              <button
+                onClick={handleLogout}
+                className="text-sm font-semibold text-[#F46A6A] px-5 py-2 rounded-full border border-[#F46A6A] hover:bg-rose-50 transition-colors duration-200"
+              >
+                Sign Out
+              </button>
+            </>
+          ) : (
+            <>
+              <a
+                href="/auth?mode=login"
+                className="text-sm font-semibold text-[#F46A6A] px-5 py-2 rounded-full border border-[#F46A6A] hover:bg-rose-50 transition-colors duration-200"
+              >
+                Sign In
+              </a>
+              <a
+                href="/auth"
+                className="text-sm font-semibold text-white bg-[#F46A6A] px-5 py-2 rounded-full hover:bg-[#e55d5d] transition-all duration-200 shadow-sm hover:shadow-md"
+              >
+                Get Started
+              </a>
+            </>
+          )}
         </div>
 
         {/* Hamburger */}
@@ -113,7 +143,7 @@ export default function Navbar() {
         }`}
       >
         <div className="bg-white border-t border-gray-100 px-4 pb-5 flex flex-col gap-1">
-          {NAV_LINKS.map((l) => (
+          {navLinks.map((l) => (
             <a
               key={l.href}
               href={l.href}
@@ -128,18 +158,29 @@ export default function Navbar() {
             </a>
           ))}
           <div className="flex gap-3 pt-4">
-            <a
-              href="/auth?mode=login"
-              className="flex-1 text-center text-sm font-semibold text-[#F46A6A] px-4 py-2.5 rounded-full border border-[#F46A6A] hover:bg-rose-50 transition-colors"
-            >
-              Sign In
-            </a>
-            <a
-              href="/auth"
-              className="flex-1 text-center text-sm font-semibold text-white bg-[#F46A6A] px-4 py-2.5 rounded-full hover:bg-[#e55d5d] transition-colors"
-            >
-              Get Started
-            </a>
+            {user ? (
+              <button
+                onClick={() => { setMenuOpen(false); handleLogout(); }}
+                className="flex-1 text-center text-sm font-semibold text-[#F46A6A] px-4 py-2.5 rounded-full border border-[#F46A6A] hover:bg-rose-50 transition-colors"
+              >
+                Sign Out
+              </button>
+            ) : (
+              <>
+                <a
+                  href="/auth?mode=login"
+                  className="flex-1 text-center text-sm font-semibold text-[#F46A6A] px-4 py-2.5 rounded-full border border-[#F46A6A] hover:bg-rose-50 transition-colors"
+                >
+                  Sign In
+                </a>
+                <a
+                  href="/auth"
+                  className="flex-1 text-center text-sm font-semibold text-white bg-[#F46A6A] px-4 py-2.5 rounded-full hover:bg-[#e55d5d] transition-colors"
+                >
+                  Get Started
+                </a>
+              </>
+            )}
           </div>
         </div>
       </div>
