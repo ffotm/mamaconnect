@@ -91,7 +91,7 @@ export default function BookingSection({ preselectedMidwife, onClearPreselected 
                 placeholder="Search midwives by name, specialty, or location..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-200 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-[#F46A6A]/30 focus:border-[#F46A6A] transition-all"
+                className="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-200 bg-white text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#F46A6A]/30 focus:border-[#F46A6A] transition-all"
               />
             </div>
 
@@ -212,7 +212,7 @@ export default function BookingSection({ preselectedMidwife, onClearPreselected 
           {/* Selected Midwife Summary */}
           <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-4 mb-6">
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#F46A6A] to-[#FBC4AB] flex items-center justify-center text-white font-bold text-sm shrink-0">
+              <div className="w-12 h-12 rounded-full bg-linear-to-br from-[#F46A6A] to-[#FBC4AB] flex items-center justify-center text-white font-bold text-sm shrink-0">
                 {getInitials(bookingMidwife?.name || "")}
               </div>
               <div className="flex-1">
