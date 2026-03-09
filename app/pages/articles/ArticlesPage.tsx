@@ -1,79 +1,18 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import ArticleCard from "@/app/components/articles/ArticleCard";
+import { ARTICLES, FEATURED_ARTICLE } from "@/app/data/articles";
 
 const CATEGORIES = ["All", "Pregnancy Health", "Nutrition", "Baby Development", "Mental Wellness"];
-
-const FEATURED_ARTICLE = {
-  image: "🤱",
-  title: "The Complete Guide to Your First Pregnancy: What Every New Mum Should Know",
-  preview:
-    "From your first positive test to the moment you hold your baby, this comprehensive guide covers everything you need to know. We explore nutrition, exercise, emotional well-being, and practical tips from experienced mothers and healthcare professionals.",
-  category: "Pregnancy Health",
-};
-
-const ARTICLES = [
-  {
-    image: "🤰",
-    title: "First Trimester: What to Expect Week by Week",
-    preview: "From morning sickness to your first scan, here is everything you need to know about the first 12 weeks of pregnancy.",
-    category: "Pregnancy Health",
-  },
-  {
-    image: "🥗",
-    title: "Nutrition Guide for Expecting Mothers",
-    preview: "Learn which foods to embrace and which to avoid during pregnancy for a healthy you and a healthy baby.",
-    category: "Nutrition",
-  },
-  {
-    image: "🧒",
-    title: "Understanding Baby Development Milestones",
-    preview: "Track your baby's growth from a tiny seed to a full-size newborn. Learn what happens each month inside the womb.",
-    category: "Baby Development",
-  },
-  {
-    image: "🧘‍♀️",
-    title: "Managing Stress and Anxiety During Pregnancy",
-    preview: "Practical techniques for maintaining your mental health during pregnancy, including breathing exercises and mindfulness.",
-    category: "Mental Wellness",
-  },
-  {
-    image: "🍎",
-    title: "Superfoods Every Pregnant Woman Should Eat",
-    preview: "Discover the nutrient-packed foods that support your baby's growth and keep your energy levels balanced.",
-    category: "Nutrition",
-  },
-  {
-    image: "👶",
-    title: "Preparing for Baby: Third Trimester Checklist",
-    preview: "Everything you need to have ready before your little one arrives — from the nursery to your hospital bag.",
-    category: "Baby Development",
-  },
-  {
-    image: "💤",
-    title: "Sleep Better During Pregnancy: Proven Tips",
-    preview: "Struggling to sleep? These expert-backed strategies will help you get the rest you and your baby need.",
-    category: "Pregnancy Health",
-  },
-  {
-    image: "🧠",
-    title: "Postpartum Mental Health: Breaking the Silence",
-    preview: "Understanding the signs of postpartum depression and anxiety, and where to find support when you need it.",
-    category: "Mental Wellness",
-  },
-  {
-    image: "🏋️‍♀️",
-    title: "Safe Exercises for Every Trimester",
-    preview: "Stay active and healthy with these pregnancy-safe workouts designed for each stage of your journey.",
-    category: "Pregnancy Health",
-  },
-];
 
 export default function ArticlesPage() {
   const [search, setSearch] = useState("");
   const [activeCategory, setActiveCategory] = useState("All");
   const [email, setEmail] = useState("");
+  const router = useRouter();
 
   const filteredArticles = ARTICLES.filter((a) => {
     const matchesSearch =
@@ -85,18 +24,18 @@ export default function ArticlesPage() {
 
   return (
     <>
-      {/* Back to Dashboard */}
+      {/* Back navigation */}
       <div className="bg-white border-b border-gray-100">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <a
-            href="/dashboard"
+          <button
+            onClick={() => router.back()}
             className="inline-flex items-center gap-2 text-sm font-medium text-gray-600 hover:text-[#F46A6A] transition-colors duration-200"
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <polyline points="15 18 9 12 15 6" />
             </svg>
-            Back to Dashboard
-          </a>
+            Back
+          </button>
         </div>
       </div>
 
@@ -183,9 +122,12 @@ export default function ArticlesPage() {
                 <p className="text-gray-500 leading-relaxed mb-6">
                   {FEATURED_ARTICLE.preview}
                 </p>
-                <button className="inline-flex items-center justify-center text-sm font-semibold text-white bg-[#F46A6A] px-7 py-3 rounded-full hover:bg-[#e55d5d] transition-all duration-200 shadow-sm hover:shadow-md hover:-translate-y-0.5 w-fit cursor-pointer">
+                <Link
+                  href={`/articles/${FEATURED_ARTICLE.id}`}
+                  className="inline-flex items-center justify-center text-sm font-semibold text-white bg-[#F46A6A] px-7 py-3 rounded-full hover:bg-[#e55d5d] transition-all duration-200 shadow-sm hover:shadow-md hover:-translate-y-0.5 w-fit"
+                >
                   Read Full Article
-                </button>
+                </Link>
               </div>
             </div>
           </div>
@@ -208,7 +150,8 @@ export default function ArticlesPage() {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredArticles.map((a) => (
                 <ArticleCard
-                  key={a.title}
+                  key={a.id}
+                  id={a.id}
                   image={a.image}
                   title={a.title}
                   preview={a.preview}
