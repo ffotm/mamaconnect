@@ -22,7 +22,7 @@ export default function ShopSection() {
           >
             {plan.popular && (
               <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
-                <span className="bg-gradient-to-r from-[#F46A6A] to-[#FBC4AB] text-white text-xs font-bold px-4 py-1.5 rounded-full shadow-sm">
+                <span className="bg-linear-to-r from-[#F46A6A] to-[#FBC4AB] text-white text-xs font-bold px-4 py-1.5 rounded-full shadow-sm">
                   Most Popular
                 </span>
               </div>
