@@ -22,7 +22,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           },
         }}
       />
-      <div className="min-h-screen bg-[#FFF5EC]">
+      <div className="min-h-screen bg-[#fff5f5]">
         <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
         <div className="lg:ml-65 min-h-screen flex flex-col">
           <Header onMenuToggle={() => setSidebarOpen(true)} />

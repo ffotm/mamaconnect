@@ -42,7 +42,7 @@ export default function Pagination({ currentPage, totalPages, onPageChange, tota
         <button
           onClick={() => onPageChange(currentPage - 1)}
           disabled={currentPage === 1}
-          className="p-2 rounded-full hover:bg-[#FFDAB9] disabled:opacity-40 disabled:cursor-not-allowed transition-colors duration-200"
+          className="p-2 rounded-full hover:bg-[#F46A6A]/10 disabled:opacity-40 disabled:cursor-not-allowed transition-colors duration-200"
         >
           <IoChevronBack size={16} />
         </button>
@@ -55,8 +55,8 @@ export default function Pagination({ currentPage, totalPages, onPageChange, tota
               onClick={() => onPageChange(page)}
               className={`min-w-[36px] h-9 rounded-full text-sm font-semibold transition-all duration-200 ${
                 page === currentPage
-                  ? "bg-[#F08080] text-white shadow-sm"
-                  : "text-gray-600 hover:bg-[#FFDAB9] hover:text-[#F08080]"
+                  ? "bg-[#F46A6A] text-white shadow-sm"
+                  : "text-gray-600 hover:bg-[#F46A6A]/10 hover:text-[#F46A6A]"
               }`}
             >
               {page}
@@ -66,7 +66,7 @@ export default function Pagination({ currentPage, totalPages, onPageChange, tota
         <button
           onClick={() => onPageChange(currentPage + 1)}
           disabled={currentPage === totalPages}
-          className="p-2 rounded-full hover:bg-[#FFDAB9] disabled:opacity-40 disabled:cursor-not-allowed transition-colors duration-200"
+          className="p-2 rounded-full hover:bg-[#F46A6A]/10 disabled:opacity-40 disabled:cursor-not-allowed transition-colors duration-200"
         >
           <IoChevronForward size={16} />
         </button>

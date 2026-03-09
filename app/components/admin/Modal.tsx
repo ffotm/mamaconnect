@@ -50,7 +50,7 @@ export default function Modal({ isOpen, onClose, title, children, size = "md" }:
           <h2 className="text-lg font-bold text-gray-900">{title}</h2>
           <button
             onClick={onClose}
-            className="p-2 rounded-full hover:bg-[#FFDAB9] transition-colors duration-200 text-gray-400 hover:text-[#F08080]"
+            className="p-2 rounded-full hover:bg-[#F46A6A]/10 transition-colors duration-200 text-gray-400 hover:text-[#F46A6A]"
           >
             <IoClose size={20} />
           </button>

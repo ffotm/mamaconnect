@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
+import { useAuth } from "@/app/components/auth/AuthContext";
 import {
   IoGridOutline,
   IoPeopleOutline,
@@ -27,6 +28,7 @@ const navItems = [
 export default function Sidebar({ isOpen, onClose }: SidebarProps) {
   const pathname = usePathname();
   const router = useRouter();
+  const { logout } = useAuth();
 
   const isActive = (href: string) => {
     if (href === "/admin") return pathname === "/admin";
@@ -34,6 +36,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
   };
 
   const handleLogout = () => {
+    logout();
     router.push("/");
   };
 
@@ -54,10 +57,10 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
           <Link href="/admin" className="flex items-center gap-2">
             <span className="text-xl">🌸</span>
             <span className="font-bold text-xl text-gray-900">
-              Mama<span className="text-[#F08080]">Connect</span>
+              Mama<span className="text-[#F46A6A]">Connect</span>
             </span>
           </Link>
-          <button onClick={onClose} className="lg:hidden p-1.5 rounded-lg hover:bg-[#FFDAB9]/50 transition-colors duration-200">
+          <button onClick={onClose} className="lg:hidden p-1.5 rounded-lg hover:bg-[#F46A6A]/10 transition-colors duration-200">
             <IoClose size={20} className="text-gray-500" />
           </button>
         </div>
@@ -74,11 +77,11 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
                 onClick={onClose}
                 className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 ${
                   active
-                    ? "bg-[#FFDAB9] text-[#F08080]"
-                    : "text-gray-600 hover:bg-[#FFDAB9]/40 hover:text-gray-900"
+                    ? "bg-[#F46A6A] text-white shadow-md shadow-[#F46A6A]/20"
+                    : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
                 }`}
               >
-                <item.icon size={20} className={active ? "text-[#F08080]" : "text-gray-400"} />
+                <item.icon size={20} className={active ? "text-white" : "text-gray-400"} />
                 {item.label}
               </Link>
             );
@@ -89,7 +92,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
         <div className="px-3 py-4 border-t border-gray-100">
           <button
             onClick={handleLogout}
-            className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-gray-600 hover:bg-[#FFDAB9] hover:text-[#F08080] transition-all duration-200 w-full"
+            className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-gray-600 hover:bg-red-50 hover:text-[#F46A6A] transition-all duration-200 w-full"
           >
             <IoLogOutOutline size={20} className="text-gray-400" />
             Logout

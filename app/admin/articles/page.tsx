@@ -40,35 +40,35 @@ function RichTextEditor({ value, onChange }: { value: string; onChange: (v: stri
   return (
     <div className="border border-gray-200 rounded-xl overflow-hidden">
       {/* Toolbar */}
-      <div className="flex items-center gap-1 px-3 py-2 border-b border-gray-200 bg-[#FFDAB9]/30 flex-wrap">
-        <button type="button" onClick={() => execCommand("bold")} className="p-1.5 rounded hover:bg-[#FBC4AB]/40 transition-colors" title="Bold">
+      <div className="flex items-center gap-1 px-3 py-2 border-b border-gray-200 bg-[#F46A6A]/5 flex-wrap">
+        <button type="button" onClick={() => execCommand("bold")} className="p-1.5 rounded hover:bg-[#F46A6A]/10 transition-colors" title="Bold">
           <BiBold size={16} className="text-gray-600" />
         </button>
-        <button type="button" onClick={() => execCommand("italic")} className="p-1.5 rounded hover:bg-[#FBC4AB]/40 transition-colors" title="Italic">
+        <button type="button" onClick={() => execCommand("italic")} className="p-1.5 rounded hover:bg-[#F46A6A]/10 transition-colors" title="Italic">
           <span className="text-gray-600 text-sm italic font-serif">I</span>
         </button>
-        <button type="button" onClick={() => execCommand("underline")} className="p-1.5 rounded hover:bg-[#FBC4AB]/40 transition-colors" title="Underline">
+        <button type="button" onClick={() => execCommand("underline")} className="p-1.5 rounded hover:bg-[#F46A6A]/10 transition-colors" title="Underline">
           <span className="text-gray-600 text-sm underline">U</span>
         </button>
-        <div className="h-5 w-px bg-[#FBC4AB]/60 mx-1" />
-        <button type="button" onClick={() => execCommand("formatBlock", "h2")} className="p-1.5 rounded hover:bg-[#FBC4AB]/40 transition-colors" title="Heading">
+        <div className="h-5 w-px bg-gray-200 mx-1" />
+        <button type="button" onClick={() => execCommand("formatBlock", "h2")} className="p-1.5 rounded hover:bg-[#F46A6A]/10 transition-colors" title="Heading">
           <span className="text-gray-600 text-xs font-bold">H2</span>
         </button>
-        <button type="button" onClick={() => execCommand("formatBlock", "h3")} className="p-1.5 rounded hover:bg-[#FBC4AB]/40 transition-colors" title="Sub Heading">
+        <button type="button" onClick={() => execCommand("formatBlock", "h3")} className="p-1.5 rounded hover:bg-[#F46A6A]/10 transition-colors" title="Sub Heading">
           <span className="text-gray-600 text-xs font-bold">H3</span>
         </button>
-        <div className="h-5 w-px bg-[#FBC4AB]/60 mx-1" />
-        <button type="button" onClick={() => execCommand("insertUnorderedList")} className="p-1.5 rounded hover:bg-[#FBC4AB]/40 transition-colors" title="List">
+        <div className="h-5 w-px bg-gray-200 mx-1" />
+        <button type="button" onClick={() => execCommand("insertUnorderedList")} className="p-1.5 rounded hover:bg-[#F46A6A]/10 transition-colors" title="List">
           <BiListUl size={16} className="text-gray-600" />
         </button>
-        <button type="button" onClick={() => execCommand("insertOrderedList")} className="p-1.5 rounded hover:bg-[#FBC4AB]/40 transition-colors" title="Numbered List">
+        <button type="button" onClick={() => execCommand("insertOrderedList")} className="p-1.5 rounded hover:bg-[#F46A6A]/10 transition-colors" title="Numbered List">
           <span className="text-gray-600 text-xs font-mono">1.</span>
         </button>
-        <div className="h-5 w-px bg-[#FBC4AB]/60 mx-1" />
+        <div className="h-5 w-px bg-gray-200 mx-1" />
         <button
           type="button"
           onClick={() => setMode(mode === "visual" ? "html" : "visual")}
-          className={`p-1.5 rounded transition-colors ${mode === "html" ? "bg-[#FBC4AB]/60" : "hover:bg-[#FBC4AB]/40"}`}
+          className={`p-1.5 rounded transition-colors ${mode === "html" ? "bg-[#F46A6A]/15" : "hover:bg-[#F46A6A]/10"}`}
           title="HTML source"
         >
           <BiCode size={16} className="text-gray-600" />
@@ -190,7 +190,7 @@ export default function ArticlesPage() {
           type="text"
           value={form.title}
           onChange={(e) => setForm({ ...form, title: e.target.value })}
-          className="w-full rounded-xl border border-gray-200 h-11 px-4 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-[#F08080]/20 focus:border-[#F08080] transition-all placeholder:text-gray-400"
+          className="w-full rounded-xl border border-gray-200 h-11 px-4 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-[#F46A6A]/20 focus:border-[#F46A6A] transition-all placeholder:text-gray-400"
           placeholder="Article title"
         />
       </div>
@@ -201,7 +201,7 @@ export default function ArticlesPage() {
             type="text"
             value={form.author}
             onChange={(e) => setForm({ ...form, author: e.target.value })}
-            className="w-full rounded-xl border border-gray-200 h-11 px-4 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-[#F08080]/20 focus:border-[#F08080] transition-all placeholder:text-gray-400"
+            className="w-full rounded-xl border border-gray-200 h-11 px-4 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-[#F46A6A]/20 focus:border-[#F46A6A] transition-all placeholder:text-gray-400"
             placeholder="Author name"
           />
         </div>
@@ -210,7 +210,7 @@ export default function ArticlesPage() {
           <select
             value={form.category}
             onChange={(e) => setForm({ ...form, category: e.target.value })}
-            className="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#F08080]/20 focus:border-[#F08080] transition-all bg-white"
+            className="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#F46A6A]/20 focus:border-[#F46A6A] transition-all bg-white"
           >
             {CATEGORIES.map((cat) => (
               <option key={cat} value={cat}>{cat}</option>
@@ -225,7 +225,7 @@ export default function ArticlesPage() {
             type="date"
             value={form.publishDate}
             onChange={(e) => setForm({ ...form, publishDate: e.target.value })}
-            className="w-full rounded-xl border border-gray-200 h-11 px-4 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-[#F08080]/20 focus:border-[#F08080] transition-all"
+            className="w-full rounded-xl border border-gray-200 h-11 px-4 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-[#F46A6A]/20 focus:border-[#F46A6A] transition-all"
           />
         </div>
         <div>
@@ -233,7 +233,7 @@ export default function ArticlesPage() {
           <select
             value={form.status}
             onChange={(e) => setForm({ ...form, status: e.target.value as Article["status"] })}
-            className="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#F08080]/20 focus:border-[#F08080] transition-all bg-white"
+            className="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#F46A6A]/20 focus:border-[#F46A6A] transition-all bg-white"
           >
             <option value="Draft">Draft</option>
             <option value="Published">Published</option>
@@ -257,7 +257,7 @@ export default function ArticlesPage() {
         </div>
         <button
           onClick={() => { setForm(emptyForm); setShowAddModal(true); }}
-          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#F08080] text-white text-sm font-semibold hover:bg-[#e07070] shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200"
+          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#F46A6A] text-white text-sm font-semibold hover:bg-[#e55d5d] shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200"
         >
           <IoAddOutline size={18} />
           New Article
@@ -274,7 +274,7 @@ export default function ArticlesPage() {
               value={search}
               onChange={(e) => { setSearch(e.target.value); setCurrentPage(1); }}
               placeholder="Search by title or author..."
-              className="w-full h-11 pl-11 pr-4 rounded-xl border border-gray-200 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-[#F08080]/20 focus:border-[#F08080] transition-all placeholder:text-gray-400"
+              className="w-full h-11 pl-11 pr-4 rounded-xl border border-gray-200 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-[#F46A6A]/20 focus:border-[#F46A6A] transition-all placeholder:text-gray-400"
             />
           </div>
           <div className="flex gap-3">
@@ -283,7 +283,7 @@ export default function ArticlesPage() {
               <select
                 value={categoryFilter}
                 onChange={(e) => { setCategoryFilter(e.target.value); setCurrentPage(1); }}
-                className="pl-8 pr-4 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-1 focus:ring-[#F08080]/20 focus:border-[#F08080] transition-all bg-white appearance-none min-w-37.5"
+                className="pl-8 pr-4 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-1 focus:ring-[#F46A6A]/20 focus:border-[#F46A6A] transition-all bg-white appearance-none min-w-37.5"
               >
                 <option value="All">All Categories</option>
                 {CATEGORIES.map((cat) => (
@@ -294,7 +294,7 @@ export default function ArticlesPage() {
             <select
               value={statusFilter}
               onChange={(e) => { setStatusFilter(e.target.value); setCurrentPage(1); }}
-              className="px-4 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-1 focus:ring-[#F08080]/20 focus:border-[#F08080] transition-all bg-white appearance-none min-w-32.5"
+              className="px-4 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-1 focus:ring-[#F46A6A]/20 focus:border-[#F46A6A] transition-all bg-white appearance-none min-w-32.5"
             >
               <option value="All">All Statuses</option>
               <option value="Published">Published</option>
@@ -330,7 +330,7 @@ export default function ArticlesPage() {
               </thead>
               <tbody className="divide-y divide-gray-50">
                 {paginated.map((article) => (
-                  <tr key={article.id} className="hover:bg-[#FFDAB9]/25 transition-colors">
+                  <tr key={article.id} className="hover:bg-[#F46A6A]/5 transition-colors">
                     <td className="px-6 py-4">
                       <p className="text-sm font-medium text-gray-900 truncate max-w-62.5">{article.title}</p>
                     </td>
@@ -338,7 +338,7 @@ export default function ArticlesPage() {
                       <span className="text-sm text-gray-600">{article.author}</span>
                     </td>
                     <td className="px-6 py-4 hidden lg:table-cell">
-                      <span className="inline-flex px-2.5 py-0.5 rounded-full text-xs font-medium bg-[#FFDAB9] text-[#F08080]">
+                      <span className="inline-flex px-2.5 py-0.5 rounded-full text-xs font-medium bg-[#F46A6A]/10 text-[#F46A6A]">
                         {article.category}
                       </span>
                     </td>
@@ -358,14 +358,14 @@ export default function ArticlesPage() {
                       <div className="flex items-center justify-end gap-1">
                         <button
                           onClick={() => openEdit(article)}
-                          className="p-2 rounded-full hover:bg-[#FFDAB9] text-gray-400 hover:text-[#F08080] transition-colors duration-200"
+                          className="p-2 rounded-full hover:bg-[#F46A6A]/10 text-gray-400 hover:text-[#F46A6A] transition-colors duration-200"
                           title="Edit Article"
                         >
                           <IoCreateOutline size={16} />
                         </button>
                         <button
                           onClick={() => openDelete(article)}
-                          className="p-2 rounded-full hover:bg-[#FFDAB9] text-gray-400 hover:text-[#F08080] transition-colors duration-200"
+                          className="p-2 rounded-full hover:bg-[#F46A6A]/10 text-gray-400 hover:text-[#F46A6A] transition-colors duration-200"
                           title="Delete Article"
                         >
                           <IoTrashOutline size={16} />
@@ -395,14 +395,14 @@ export default function ArticlesPage() {
         <div className="flex justify-end gap-3 pt-4 border-t border-gray-100">
           <button
             onClick={() => { setShowAddModal(false); setForm(emptyForm); }}
-            className="px-5 py-2.5 rounded-full border border-gray-200 text-sm font-semibold text-gray-700 hover:bg-[#FFDAB9]/40 active:bg-[#FFDAB9]/60 transition-colors"
+            className="px-5 py-2.5 rounded-full border border-gray-200 text-sm font-semibold text-gray-700 hover:bg-gray-50 active:bg-gray-100 transition-colors"
           >
             Cancel
           </button>
           <button
             onClick={handleAdd}
             disabled={isLoading}
-            className="px-5 py-2.5 rounded-full bg-[#F08080] text-white text-sm font-semibold hover:bg-[#e07070] active:bg-[#d06060] transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+            className="px-5 py-2.5 rounded-full bg-[#F46A6A] text-white text-sm font-semibold hover:bg-[#e55d5d] active:bg-[#d45252] transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
           >
             {isLoading ? "Saving..." : "Create Article"}
           </button>
@@ -415,14 +415,14 @@ export default function ArticlesPage() {
         <div className="flex justify-end gap-3 pt-4 border-t border-gray-100">
           <button
             onClick={() => { setShowEditModal(false); setForm(emptyForm); }}
-            className="px-5 py-2.5 rounded-full border border-gray-200 text-sm font-semibold text-gray-700 hover:bg-[#FFDAB9]/40 active:bg-[#FFDAB9]/60 transition-colors"
+            className="px-5 py-2.5 rounded-full border border-gray-200 text-sm font-semibold text-gray-700 hover:bg-gray-50 active:bg-gray-100 transition-colors"
           >
             Cancel
           </button>
           <button
             onClick={handleEdit}
             disabled={isLoading}
-            className="px-5 py-2.5 rounded-full bg-[#F08080] text-white text-sm font-semibold hover:bg-[#e07070] active:bg-[#d06060] transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+            className="px-5 py-2.5 rounded-full bg-[#F46A6A] text-white text-sm font-semibold hover:bg-[#e55d5d] active:bg-[#d45252] transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
           >
             {isLoading ? "Saving..." : "Save Changes"}
           </button>
