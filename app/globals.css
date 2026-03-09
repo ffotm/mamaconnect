@@ -49,3 +49,41 @@ body {
 .animate-scaleIn {
   animation: scaleIn 0.2s ease-out;
 }
+
+/* Auth sub-step entrance animation */
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-slideInRight {
+  animation: slideInRight 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Auth form reveal — fires after the sliding panel uncovers the form */
+@keyframes formReveal {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Desktop: delay matches the panel slide (fires at ~400 ms into the 700 ms transition) */
+.animate-formReveal {
+  animation: formReveal 0.45s cubic-bezier(0.4, 0, 0.2, 1) 0.38s both;
+}
+
+/* Mobile: no delay needed — instant switch */
+.animate-formRevealMobile {
+  animation: formReveal 0.35s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
