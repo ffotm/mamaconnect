@@ -1,6 +1,10 @@
 "use client";
 
-import { TabKey, SIDEBAR_TABS, getInitials } from "./data";
+import {
+  TabKey,
+  SIDEBAR_TABS,
+  getInitials,
+} from "./data";
 
 interface SidebarProps {
   activeTab: TabKey;
@@ -22,13 +26,13 @@ export default function Sidebar({ activeTab, onTabChange, userName, userEmail }:
         </a>
       </div>
 
-      {/* Nav Items */}
-      <nav className="flex-1 px-3 py-4 space-y-1 overflow-y-auto">
+      {/* Nav */}
+      <nav className="flex-1 px-3 py-4 overflow-y-auto flex flex-col gap-1">
         {SIDEBAR_TABS.map((tab) => (
           <button
             key={tab.key}
             onClick={() => onTabChange(tab.key)}
-            className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200 ${
+            className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200 cursor-pointer ${
               activeTab === tab.key
                 ? "bg-[#F46A6A] text-white shadow-md shadow-[#F46A6A]/20"
                 : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
@@ -40,10 +44,10 @@ export default function Sidebar({ activeTab, onTabChange, userName, userEmail }:
         ))}
       </nav>
 
-      {/* Sidebar Footer - User Preview */}
+      {/* Sidebar Footer — User Preview */}
       <div className="px-4 py-4 border-t border-gray-100 shrink-0">
         <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-full bg-gradient-to-br from-[#F46A6A] to-[#FBC4AB] flex items-center justify-center text-white font-bold text-xs shrink-0">
+          <div className="w-9 h-9 rounded-full bg-linear-to-br from-[#F46A6A] to-[#FBC4AB] flex items-center justify-center text-white font-bold text-xs shrink-0">
             {getInitials(userName)}
           </div>
           <div className="flex-1 min-w-0">
