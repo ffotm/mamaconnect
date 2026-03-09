@@ -137,34 +137,15 @@ export default function MonitoringAlerts() {
         </div>
       </div>
 
-      {/* ── Row 2: Movement + SpO2 ────────────────────────────────── */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        {/* Movement */}
-        <div className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 flex items-center gap-5">
-          <CircularProgress value={WEARABLE_DATA.movement} color="#F46A6A" />
-          <div>
-            <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider">Movement</p>
-            <p className="text-2xl font-extrabold text-gray-900 mt-1">{WEARABLE_DATA.movement}%</p>
-            <span className="inline-block text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 mt-1.5">
-              Active
-            </span>
-          </div>
-        </div>
-
-        {/* SpO2 */}
-        <div className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 flex flex-col justify-between">
-          <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider">Oxygen SpO2</p>
-          <div className="flex items-end justify-between mt-2">
-            <div>
-              <span className="text-4xl font-extrabold text-gray-900">{WEARABLE_DATA.spo2}</span>
-              <span className="text-base font-medium text-gray-500 ml-1">%</span>
-            </div>
-            <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700">Normal</span>
-          </div>
-          <div className="mt-3 w-full bg-gray-100 rounded-full h-2 overflow-hidden">
-            <div className="h-2 rounded-full bg-emerald-400" style={{ width: `${WEARABLE_DATA.spo2}%` }} />
-          </div>
-          <p className="text-[11px] text-gray-400 mt-2">Normal: <span className="font-semibold text-gray-600">95 – 100%</span></p>
+      {/* ── Row 2: Movement ───────────────────────────────────────── */}
+      <div className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 flex items-center gap-5">
+        <CircularProgress value={WEARABLE_DATA.movement} color="#F46A6A" />
+        <div>
+          <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider">Movement</p>
+          <p className="text-2xl font-extrabold text-gray-900 mt-1">{WEARABLE_DATA.movement}%</p>
+          <span className="inline-block text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 mt-1.5">
+            Active
+          </span>
         </div>
       </div>
 

@@ -106,7 +106,6 @@ export const alertStyles = {
    ═══════════════════════════════════════════════════════════ */
 
 export const WEARABLE_DATA = {
-  spo2: 98.2,
   heartRate: 142,
   temp: 36.7,
   battery: 87,
