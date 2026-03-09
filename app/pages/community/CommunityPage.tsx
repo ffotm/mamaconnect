@@ -233,6 +233,10 @@ export default function CommunityPage() {
   const [activeTopic, setActiveTopic] = useState("All Topics");
   const [expandedPost, setExpandedPost] = useState<number | null>(null);
   const [likedPosts, setLikedPosts] = useState<Set<number>>(new Set());
+  const [newPostOpen, setNewPostOpen] = useState(false);
+  const [postTitle, setPostTitle] = useState("");
+  const [postTopic, setPostTopic] = useState(TOPICS[1]);
+  const [postContent, setPostContent] = useState("");
 
   const filtered = POSTS.filter(
     (p) => activeTopic === "All Topics" || p.topic === activeTopic
@@ -327,7 +331,7 @@ export default function CommunityPage() {
             <h2 className="text-2xl font-bold text-gray-900">
               {activeTopic === "All Topics" ? "Latest Discussions" : activeTopic}
             </h2>
-            <button className="text-sm font-semibold text-white bg-[#F46A6A] px-5 py-2 rounded-full hover:bg-[#e55d5d] transition-all duration-200 shadow-sm hover:shadow-md cursor-pointer">
+            <button onClick={() => setNewPostOpen(true)} className="text-sm font-semibold text-white bg-[#F46A6A] px-5 py-2 rounded-full hover:bg-[#e55d5d] transition-all duration-200 shadow-sm hover:shadow-md cursor-pointer">
               + New Post
             </button>
           </div>
@@ -342,7 +346,7 @@ export default function CommunityPage() {
                   {/* Post body */}
                   <div className="p-6">
                     <div className="flex items-start gap-4">
-                      <div className={`w-11 h-11 rounded-full bg-gradient-to-br ${post.avatarColor} flex items-center justify-center text-white font-bold text-sm flex-shrink-0`}>
+                      <div className={`w-11 h-11 rounded-full bg-linear-to-br ${post.avatarColor} flex items-center justify-center text-white font-bold text-sm shrink-0`}>
                         {post.initials}
                       </div>
                       <div className="flex-1 min-w-0">
@@ -404,7 +408,7 @@ export default function CommunityPage() {
                       {post.replies.map((reply) => (
                         <div key={reply.id} className="px-6 py-4 border-b border-gray-100 last:border-b-0">
                           <div className="flex items-start gap-3">
-                            <div className={`w-8 h-8 rounded-full bg-gradient-to-br ${reply.avatarColor} flex items-center justify-center text-white font-bold text-xs flex-shrink-0`}>
+                            <div className={`w-8 h-8 rounded-full bg-linear-to-br ${reply.avatarColor} flex items-center justify-center text-white font-bold text-xs shrink-0`}>
                               {reply.initials}
                             </div>
                             <div className="flex-1 min-w-0">
@@ -427,7 +431,7 @@ export default function CommunityPage() {
                       {/* Reply input */}
                       <div className="px-6 py-4">
                         <div className="flex items-center gap-3">
-                          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#F46A6A] to-[#FBC4AB] flex items-center justify-center text-white font-bold text-xs flex-shrink-0">
+                          <div className="w-8 h-8 rounded-full bg-linear-to-br from-[#F46A6A] to-[#FBC4AB] flex items-center justify-center text-white font-bold text-xs shrink-0">
                             Me
                           </div>
                           <div className="flex-1 flex items-center gap-2">
@@ -436,7 +440,7 @@ export default function CommunityPage() {
                               placeholder="Write a reply..."
                               className="flex-1 rounded-xl border border-gray-200 py-2.5 px-4 text-sm text-gray-800 outline-none focus:border-[#F46A6A] transition-colors placeholder:text-gray-400 bg-white"
                             />
-                            <button className="text-sm font-semibold text-white bg-[#F46A6A] px-4 py-2.5 rounded-xl hover:bg-[#e55d5d] transition-colors flex-shrink-0 cursor-pointer">
+                            <button className="text-sm font-semibold text-white bg-[#F46A6A] px-4 py-2.5 rounded-xl hover:bg-[#e55d5d] transition-colors shrink-0 cursor-pointer">
                               Reply
                             </button>
                           </div>
@@ -456,37 +460,72 @@ export default function CommunityPage() {
         </div>
       </section>
 
-      {/* Join CTA */}
-      <section className="bg-white py-16 sm:py-20">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-gradient-to-br from-rose-50 to-pink-50 rounded-2xl p-8 sm:p-12 text-center">
-            <span className="inline-block text-xs font-semibold tracking-wider uppercase text-[#F46A6A] bg-white/70 px-3 py-1 rounded-full mb-3">
-              Join the Conversation
-            </span>
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-3">
-              You&apos;re Not Alone in This Journey
-            </h2>
-            <p className="text-gray-500 max-w-md mx-auto mb-8">
-              Connect with thousands of Algerian mothers who understand what you&apos;re going through.
-              Share, learn, and grow together.
-            </p>
-            <div className="flex flex-wrap justify-center gap-3">
-              <a
-                href="/auth?mode=signup"
-                className="inline-flex items-center justify-center text-sm font-semibold text-white bg-[#F46A6A] px-7 py-3 rounded-full hover:bg-[#e55d5d] transition-all duration-200 shadow-sm hover:shadow-md hover:-translate-y-0.5"
+      {/* New Post Modal */}
+      {newPostOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-4">
+          <div className="bg-white rounded-2xl shadow-xl w-full max-w-lg">
+            <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
+              <h3 className="text-base font-bold text-gray-900">New Post</h3>
+              <button
+                onClick={() => setNewPostOpen(false)}
+                className="text-gray-400 hover:text-gray-600 transition-colors"
               >
-                Join Our Community
-              </a>
-              <a
-                href="/dashboard"
-                className="inline-flex items-center justify-center text-sm font-semibold text-[#F46A6A] px-7 py-3 rounded-full border border-[#F46A6A] hover:bg-rose-50 transition-colors"
-              >
-                Go to Dashboard
-              </a>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
+              </button>
+            </div>
+            <div className="p-6 space-y-4">
+              <div>
+                <label className="block text-xs font-medium text-gray-600 mb-1.5">Topic</label>
+                <select
+                  value={postTopic}
+                  onChange={(e) => setPostTopic(e.target.value)}
+                  className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#F46A6A]/30 focus:border-[#F46A6A]"
+                >
+                  {TOPICS.filter((t) => t !== "All Topics").map((t) => (
+                    <option key={t} value={t}>{t}</option>
+                  ))}
+                </select>
+              </div>
+              <div>
+                <label className="block text-xs font-medium text-gray-600 mb-1.5">Title</label>
+                <input
+                  type="text"
+                  placeholder="What's your post about?"
+                  value={postTitle}
+                  onChange={(e) => setPostTitle(e.target.value)}
+                  className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#F46A6A]/30 focus:border-[#F46A6A]"
+                />
+              </div>
+              <div>
+                <label className="block text-xs font-medium text-gray-600 mb-1.5">Content</label>
+                <textarea
+                  rows={4}
+                  placeholder="Share your thoughts, questions, or experience..."
+                  value={postContent}
+                  onChange={(e) => setPostContent(e.target.value)}
+                  className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#F46A6A]/30 focus:border-[#F46A6A] resize-none"
+                />
+              </div>
+              <div className="flex gap-3 pt-1">
+                <button
+                  onClick={() => setNewPostOpen(false)}
+                  className="flex-1 py-2.5 rounded-xl border border-gray-200 text-sm font-medium text-gray-600 hover:bg-gray-50 transition-colors"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={() => { setNewPostOpen(false); setPostTitle(""); setPostContent(""); }}
+                  className="flex-1 py-2.5 rounded-xl bg-[#F46A6A] text-white text-sm font-semibold hover:bg-[#e55a5a] transition-colors shadow-sm"
+                >
+                  Post
+                </button>
+              </div>
             </div>
           </div>
         </div>
-      </section>
+      )}
     </>
   );
 }
