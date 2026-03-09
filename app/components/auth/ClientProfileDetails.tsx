@@ -47,6 +47,14 @@ function PregnancyIcon() {
   );
 }
 
+function BloodTypeIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M12 2L8 8a5 5 0 1 0 8 0L12 2z" />
+    </svg>
+  );
+}
+
 const ILLNESS_OPTIONS = [
   "Diabetes",
   "Hypertension",
@@ -65,6 +73,8 @@ const ALLERGY_OPTIONS = [
   "None",
 ];
 
+const BLOOD_TYPE_OPTIONS = ["A+", "A−", "B+", "B−", "AB+", "AB−", "O+", "O−"];
+
 function ArrowLeftIcon() {
   return (
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -78,6 +88,7 @@ interface ClientProfileDetailsProps {
   onBack?: () => void;
   onContinue?: (data: {
     birthday: string;
+    bloodType: string;
     conditions: string[];
     allergies: string[];
     pregnancyStage: string;
@@ -86,12 +97,20 @@ interface ClientProfileDetailsProps {
 
 export default function ClientProfileDetails({ onBack, onContinue }: ClientProfileDetailsProps) {
   const [birthday, setBirthday] = useState("");
+  const [bloodType, setBloodType] = useState("");
   const [conditions, setConditions] = useState<string[]>([]);
   const [allergies, setAllergies] = useState<string[]>([]);
   const [pregnancyStage, setPregnancyStage] = useState("");
+  const [birthdayError, setBirthdayError] = useState("");
+  const [pregnancyError, setPregnancyError] = useState("");
 
   function handleSubmit() {
-    onContinue?.({ birthday, conditions, allergies, pregnancyStage });
+    const bdErr  = birthday       ? "" : "Date of birth is required";
+    const pregErr = pregnancyStage ? "" : "Pregnancy date is required";
+    setBirthdayError(bdErr);
+    setPregnancyError(pregErr);
+    if (bdErr || pregErr) return;
+    onContinue?.({ birthday, bloodType, conditions, allergies, pregnancyStage });
   }
 
   return (
@@ -117,9 +136,30 @@ export default function ClientProfileDetails({ onBack, onContinue }: ClientProfi
             type="date"
             placeholder="Your birthday"
             value={birthday}
-            onChange={(e) => setBirthday(e.target.value)}
-            className="w-full rounded-xl border border-gray-200 h-11 pl-11 pr-4 text-sm text-gray-800 outline-none focus:border-[#F46A6A] focus:ring-1 focus:ring-[#F46A6A]/20 transition-all placeholder:text-gray-300"
+            onChange={(e) => { setBirthday(e.target.value); if (birthdayError) setBirthdayError(""); }}
+            className={`w-full rounded-xl border ${birthdayError ? "border-red-400" : "border-gray-200"} h-11 pl-11 pr-4 text-sm text-gray-800 outline-none focus:border-[#F46A6A] focus:ring-1 focus:ring-[#F46A6A]/20 transition-all placeholder:text-gray-300`}
           />
+        </div>
+        {birthdayError && <p className="text-xs text-red-500 mt-1">{birthdayError}</p>}
+      </div>
+
+      {/* Blood Type */}
+      <div className="mb-3.5">
+        <label className="block text-xs font-medium text-gray-500 mb-1.5">What is your blood type?</label>
+        <div className="relative">
+          <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 z-10 pointer-events-none">
+            <BloodTypeIcon />
+          </span>
+          <select
+            value={bloodType}
+            onChange={(e) => setBloodType(e.target.value)}
+            className="w-full rounded-xl border border-gray-200 h-11 pl-11 pr-4 text-sm text-gray-800 outline-none focus:border-[#F46A6A] focus:ring-1 focus:ring-[#F46A6A]/20 transition-all appearance-none bg-white"
+          >
+            <option value="" disabled>Select blood type</option>
+            {BLOOD_TYPE_OPTIONS.map((t) => (
+              <option key={t} value={t}>{t}</option>
+            ))}
+          </select>
         </div>
       </div>
 
@@ -154,10 +194,11 @@ export default function ClientProfileDetails({ onBack, onContinue }: ClientProfi
             type="date"
             placeholder="Pregnancy date"
             value={pregnancyStage}
-            onChange={(e) => setPregnancyStage(e.target.value)}
-            className="w-full rounded-xl border border-gray-200 h-11 pl-11 pr-4 text-sm text-gray-800 outline-none focus:border-[#F46A6A] focus:ring-1 focus:ring-[#F46A6A]/20 transition-all placeholder:text-gray-300"
+            onChange={(e) => { setPregnancyStage(e.target.value); if (pregnancyError) setPregnancyError(""); }}
+            className={`w-full rounded-xl border ${pregnancyError ? "border-red-400" : "border-gray-200"} h-11 pl-11 pr-4 text-sm text-gray-800 outline-none focus:border-[#F46A6A] focus:ring-1 focus:ring-[#F46A6A]/20 transition-all placeholder:text-gray-300`}
           />
         </div>
+        {pregnancyError && <p className="text-xs text-red-500 mt-1">{pregnancyError}</p>}
       </div>
 
       {/* Continue button */}

@@ -5,14 +5,16 @@ import { createContext, useContext, useState, useEffect, ReactNode } from "react
 interface AuthUser {
   name: string;
   email: string;
+  phone: string;
   role: "client" | "midwife";
+  status: "active" | "pending";
 }
 
 interface AuthContextValue {
   user: AuthUser | null;
   isLoading: boolean;
   login: (email: string) => void;
-  signup: (name: string, email: string, role: "client" | "midwife") => void;
+  signup: (name: string, email: string, phone: string, role: "client" | "midwife", status?: "active" | "pending") => void;
   logout: () => void;
 }
 
@@ -37,13 +39,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   function login(email: string) {
-    const authUser: AuthUser = { name: email.split("@")[0], email, role: "client" };
+    const authUser: AuthUser = { name: email.split("@")[0], email, phone: "", role: "client", status: "active" };
     localStorage.setItem(STORAGE_KEY, JSON.stringify(authUser));
     setUser(authUser);
   }
 
-  function signup(name: string, email: string, role: "client" | "midwife") {
-    const authUser: AuthUser = { name, email, role };
+  function signup(name: string, email: string, phone: string, role: "client" | "midwife", status: "active" | "pending" = "active") {
+    const authUser: AuthUser = { name, email, phone, role, status };
     localStorage.setItem(STORAGE_KEY, JSON.stringify(authUser));
     setUser(authUser);
   }
