@@ -106,6 +106,7 @@ export default function Login({ onSwitch }: LoginProps) {
             value={email}
             onChange={(e) => { setEmail(e.target.value); if (emailError) setEmailError(""); }}
             onBlur={() => setEmailError(validateEmail(email))}
+            required
             className={`w-full rounded-xl border ${emailError ? "border-red-400" : "border-gray-200"} h-11 pl-11 pr-4 text-sm text-gray-800 outline-none focus:border-[#F46A6A] focus:ring-1 focus:ring-[#F46A6A]/20 transition-all placeholder:text-gray-300`}
           />
         </div>
@@ -124,6 +125,7 @@ export default function Login({ onSwitch }: LoginProps) {
             placeholder="Enter your password"
             value={password}
             onChange={(e) => { setPassword(e.target.value); if (passwordError) setPasswordError(""); }}
+            required
             className={`w-full rounded-xl border ${passwordError ? "border-red-400" : "border-gray-200"} h-11 pl-11 pr-11 text-sm text-gray-800 outline-none focus:border-[#F46A6A] focus:ring-1 focus:ring-[#F46A6A]/20 transition-all placeholder:text-gray-300`}
           />
           <button
