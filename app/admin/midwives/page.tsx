@@ -126,7 +126,7 @@ export default function MidwivesPage() {
           type="text"
           value={form.name}
           onChange={(e) => setForm({ ...form, name: e.target.value })}
-          className="w-full rounded-xl h-11 px-4 border border-gray-200 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-[#F08080]/20 focus:border-[#F08080] transition-all placeholder:text-gray-400"
+          className="w-full rounded-xl h-11 px-4 border border-gray-200 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-[#F46A6A]/20 focus:border-[#F46A6A] transition-all placeholder:text-gray-400"
           placeholder="Enter full name"
         />
       </div>
@@ -137,7 +137,7 @@ export default function MidwivesPage() {
             type="email"
             value={form.email}
             onChange={(e) => setForm({ ...form, email: e.target.value })}
-            className="w-full rounded-xl h-11 px-4 border border-gray-200 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-[#F08080]/20 focus:border-[#F08080] transition-all placeholder:text-gray-400"
+            className="w-full rounded-xl h-11 px-4 border border-gray-200 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-[#F46A6A]/20 focus:border-[#F46A6A] transition-all placeholder:text-gray-400"
             placeholder="Email address"
           />
         </div>
@@ -147,7 +147,7 @@ export default function MidwivesPage() {
             type="tel"
             value={form.phone}
             onChange={(e) => setForm({ ...form, phone: e.target.value })}
-            className="w-full rounded-xl h-11 px-4 border border-gray-200 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-[#F08080]/20 focus:border-[#F08080] transition-all placeholder:text-gray-400"
+            className="w-full rounded-xl h-11 px-4 border border-gray-200 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-[#F46A6A]/20 focus:border-[#F46A6A] transition-all placeholder:text-gray-400"
             placeholder="Phone number"
           />
         </div>
@@ -159,7 +159,7 @@ export default function MidwivesPage() {
             type="text"
             value={form.certificationNumber}
             onChange={(e) => setForm({ ...form, certificationNumber: e.target.value })}
-            className="w-full rounded-xl h-11 px-4 border border-gray-200 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-[#F08080]/20 focus:border-[#F08080] transition-all placeholder:text-gray-400"
+            className="w-full rounded-xl h-11 px-4 border border-gray-200 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-[#F46A6A]/20 focus:border-[#F46A6A] transition-all placeholder:text-gray-400"
             placeholder="MW-XXXX-XXX"
           />
         </div>
@@ -169,7 +169,7 @@ export default function MidwivesPage() {
             type="text"
             value={form.location}
             onChange={(e) => setForm({ ...form, location: e.target.value })}
-            className="w-full rounded-xl h-11 px-4 border border-gray-200 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-[#F08080]/20 focus:border-[#F08080] transition-all placeholder:text-gray-400"
+            className="w-full rounded-xl h-11 px-4 border border-gray-200 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-[#F46A6A]/20 focus:border-[#F46A6A] transition-all placeholder:text-gray-400"
             placeholder="City, Country"
           />
         </div>
@@ -179,7 +179,7 @@ export default function MidwivesPage() {
         <select
           value={form.status}
           onChange={(e) => setForm({ ...form, status: e.target.value as Midwife["status"] })}
-          className="w-full rounded-xl h-11 px-4 border border-gray-200 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-[#F08080]/20 focus:border-[#F08080] transition-all bg-white"
+          className="w-full rounded-xl h-11 px-4 border border-gray-200 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-[#F46A6A]/20 focus:border-[#F46A6A] transition-all bg-white"
         >
           <option value="Active">Active</option>
           <option value="Inactive">Inactive</option>
@@ -200,7 +200,7 @@ export default function MidwivesPage() {
         </div>
         <button
           onClick={() => { setForm(emptyForm); setShowAddModal(true); }}
-          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#F08080] text-white text-sm font-semibold hover:bg-[#e07070] shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200"
+          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#F46A6A] text-white text-sm font-semibold hover:bg-[#e55d5d] shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200"
         >
           <IoAddOutline size={18} />
           Add Midwife
@@ -217,7 +217,7 @@ export default function MidwivesPage() {
               value={search}
               onChange={(e) => { setSearch(e.target.value); setCurrentPage(1); }}
               placeholder="Search by name, email, or location..."
-              className="w-full h-11 pl-11 pr-4 rounded-xl border border-gray-200 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-[#F08080]/20 focus:border-[#F08080] transition-all placeholder:text-gray-400"
+              className="w-full h-11 pl-11 pr-4 rounded-xl border border-gray-200 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-[#F46A6A]/20 focus:border-[#F46A6A] transition-all placeholder:text-gray-400"
             />
           </div>
           <div className="relative">
@@ -225,7 +225,7 @@ export default function MidwivesPage() {
             <select
               value={statusFilter}
               onChange={(e) => { setStatusFilter(e.target.value); setCurrentPage(1); }}
-              className="pl-8 pr-4 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-1 focus:ring-[#F08080]/20 focus:border-[#F08080] transition-all bg-white appearance-none min-w-32.5"
+              className="pl-8 pr-4 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-1 focus:ring-[#F46A6A]/20 focus:border-[#F46A6A] transition-all bg-white appearance-none min-w-32.5"
             >
               <option value="All">All Statuses</option>
               <option value="Active">Active</option>
@@ -256,8 +256,8 @@ export default function MidwivesPage() {
             >
               <div className="flex items-start justify-between mb-4">
                 <div className="flex items-center gap-3">
-                  <div className="w-11 h-11 rounded-full bg-[#FFDAB9] flex items-center justify-center">
-                    <span className="text-[#F08080] font-semibold text-sm">
+                  <div className="w-11 h-11 rounded-full bg-linear-to-br from-[#F46A6A] to-[#FBC4AB] flex items-center justify-center">
+                    <span className="text-white font-semibold text-sm">
                       {midwife.name.split(" ").map((n) => n[0]).join("")}
                     </span>
                   </div>
@@ -269,13 +269,13 @@ export default function MidwivesPage() {
                 <div className="flex gap-1">
                   <button
                     onClick={() => openEdit(midwife)}
-                    className="p-1.5 rounded-full hover:bg-[#FFDAB9] text-gray-400 hover:text-[#F08080] transition-colors duration-200"
+                    className="p-1.5 rounded-full hover:bg-[#F46A6A]/10 text-gray-400 hover:text-[#F46A6A] transition-colors duration-200"
                   >
                     <IoCreateOutline size={16} />
                   </button>
                   <button
                     onClick={() => openDelete(midwife)}
-                    className="p-1.5 rounded-full hover:bg-[#FFDAB9] text-gray-400 hover:text-[#F08080] transition-colors duration-200"
+                    className="p-1.5 rounded-full hover:bg-[#F46A6A]/10 text-gray-400 hover:text-[#F46A6A] transition-colors duration-200"
                   >
                     <IoTrashOutline size={16} />
                   </button>
@@ -321,14 +321,14 @@ export default function MidwivesPage() {
         <div className="flex justify-end gap-3 pt-4 border-t border-gray-100">
           <button
             onClick={() => { setShowAddModal(false); setForm(emptyForm); }}
-            className="px-5 py-2.5 rounded-full border border-gray-200 text-sm font-semibold text-gray-700 hover:bg-[#FFDAB9]/40 active:bg-[#FFDAB9]/60 transition-colors"
+            className="px-5 py-2.5 rounded-full border border-gray-200 text-sm font-semibold text-gray-700 hover:bg-gray-50 active:bg-gray-100 transition-colors"
           >
             Cancel
           </button>
           <button
             onClick={handleAdd}
             disabled={isLoading}
-            className="px-5 py-2.5 rounded-full bg-[#F08080] text-white text-sm font-semibold hover:bg-[#e07070] active:bg-[#d06060] transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+            className="px-5 py-2.5 rounded-full bg-[#F46A6A] text-white text-sm font-semibold hover:bg-[#e55d5d] active:bg-[#d45252] transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
           >
             {isLoading ? "Saving..." : "Add Midwife"}
           </button>
@@ -341,14 +341,14 @@ export default function MidwivesPage() {
         <div className="flex justify-end gap-3 pt-4 border-t border-gray-100">
           <button
             onClick={() => { setShowEditModal(false); setForm(emptyForm); }}
-            className="px-5 py-2.5 rounded-full border border-gray-200 text-sm font-semibold text-gray-700 hover:bg-[#FFDAB9]/40 active:bg-[#FFDAB9]/60 transition-colors"
+            className="px-5 py-2.5 rounded-full border border-gray-200 text-sm font-semibold text-gray-700 hover:bg-gray-50 active:bg-gray-100 transition-colors"
           >
             Cancel
           </button>
           <button
             onClick={handleEdit}
             disabled={isLoading}
-            className="px-5 py-2.5 rounded-full bg-[#F08080] text-white text-sm font-semibold hover:bg-[#e07070] active:bg-[#d06060] transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+            className="px-5 py-2.5 rounded-full bg-[#F46A6A] text-white text-sm font-semibold hover:bg-[#e55d5d] active:bg-[#d45252] transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
           >
             {isLoading ? "Saving..." : "Save Changes"}
           </button>
