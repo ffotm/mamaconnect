@@ -11,6 +11,7 @@ import MonitoringAlerts from "@/app/components/dashboard/MonitoringAlerts";
 import BookingSection from "@/app/components/dashboard/BookingSection";
 import ShopSection from "@/app/components/dashboard/ShopSection";
 import ChatSection from "@/app/components/dashboard/ChatSection";
+
 import TrackerSection from "@/app/components/dashboard/TrackerSection";
 
 export default function DashboardPage() {
@@ -72,13 +73,10 @@ export default function DashboardPage() {
             <DashboardHome
               greeting={greeting}
               userName={user.name}
-              onGoToShop={() => setActiveTab("shop")}
-              onGoToTracker={() => setActiveTab("tracker")}
               onGoToBooking={() => setActiveTab("booking")}
             />
           )}
           {activeTab === "monitoring" && <MonitoringAlerts />}
-          {activeTab === "tracker" && <TrackerSection />}
           {activeTab === "booking" && (
             <BookingSection
               preselectedMidwife={bookingMidwife}
@@ -87,6 +85,7 @@ export default function DashboardPage() {
           )}
           {activeTab === "shop" && <ShopSection />}
           {activeTab === "chat" && <ChatSection />}
+          {activeTab === "timeline" && <TrackerSection />}
         </main>
       </div>
     </div>

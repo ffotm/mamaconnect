@@ -13,32 +13,28 @@ import {
 } from "./data";
 import { ChevronRightIcon } from "./icons";
 
-const ITEM_ROUTES: Record<string, string | null> = {
+const ITEM_ROUTES: Record<string, string> = {
   Medicines: "/medicines",
   Exercises: "/exercises",
   Hospitals: "/hospitals",
   Articles: "/articles",
-  Shop: null,
+  "Food Recommendations": "/food-recommendations",
   Community: "/community",
 };
 
 interface DashboardHomeProps {
   greeting: string;
   userName: string;
-  onGoToShop?: () => void;
-  onGoToTracker?: () => void;
   onGoToBooking?: () => void;
 }
 
-export default function DashboardHome({ greeting, userName, onGoToShop, onGoToTracker, onGoToBooking }: DashboardHomeProps) {
+export default function DashboardHome({ greeting, userName, onGoToBooking }: DashboardHomeProps) {
   const router = useRouter();
 
   function handleServiceClick(label: string) {
     const route = ITEM_ROUTES[label];
     if (route) {
       router.push(route);
-    } else if (label === "Shop" && onGoToShop) {
-      onGoToShop();
     }
   }
 
@@ -75,14 +71,6 @@ export default function DashboardHome({ greeting, userName, onGoToShop, onGoToTr
                   <p className="text-[11px] uppercase tracking-wider text-gray-500 font-medium mb-0.5">Remaining</p>
                   <p className="text-xl font-extrabold text-gray-900">{DAYS_TO_GO}<span className="text-sm font-medium text-gray-500 ml-1">Days to Go</span></p>
                 </div>
-                {onGoToTracker && (
-                  <button
-                    onClick={onGoToTracker}
-                    className="bg-[#F46A6A] text-white rounded-2xl px-5 py-3 shadow-sm text-sm font-semibold hover:bg-[#e55d5d] transition-all duration-200 hover:shadow-md cursor-pointer"
-                  >
-                    View Week {PREGNANCY_WEEK} Details →
-                  </button>
-                )}
               </div>
             </div>
 
