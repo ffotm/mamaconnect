@@ -4,7 +4,6 @@ import {
   DumbbellIcon,
   HospitalIcon,
   BookOpenIcon,
-  ShoppingBagIcon,
   UsersIcon,
   VideoIcon,
   HomeIcon,
@@ -14,14 +13,14 @@ import {
   CalendarIcon,
   ShopIcon,
   ChatIcon,
-  TrackerIcon,
+  FoodIcon,
 } from "./icons";
 
 /* ═══════════════════════════════════════════════════════════
    TYPES
    ═══════════════════════════════════════════════════════════ */
 
-export type TabKey = "home" | "monitoring" | "booking" | "shop" | "chat" | "tracker";
+export type TabKey = "home" | "monitoring" | "booking" | "shop" | "chat" | "timeline";
 
 export interface Midwife {
   id: number;
@@ -66,7 +65,7 @@ export const SERVICE_ITEMS = [
   { icon: "dumbbell", label: "Exercises", desc: "Prenatal fitness routines", color: "from-violet-400 to-purple-500" },
   { icon: "hospital", label: "Hospitals", desc: "Nearby clinics & emergency", color: "from-blue-400 to-cyan-500" },
   { icon: "book", label: "Articles", desc: "Weekly guides & tips", color: "from-amber-400 to-orange-500" },
-  { icon: "shop", label: "Shop", desc: "Plans & essentials", color: "from-emerald-400 to-teal-500" },
+  { icon: "food", label: "Food Recommendations", desc: "Healthy meal suggestions for pregnancy.", color: "from-emerald-400 to-teal-500" },
   { icon: "community", label: "Community", desc: "Connect with other mamas", color: "from-pink-400 to-rose-500" },
 ];
 
@@ -75,7 +74,7 @@ export const serviceIcons: Record<string, React.ReactNode> = {
   dumbbell: <DumbbellIcon />,
   hospital: <HospitalIcon />,
   book: <BookOpenIcon />,
-  shop: <ShoppingBagIcon />,
+  food: <FoodIcon />,
   community: <UsersIcon />,
 };
 
@@ -103,11 +102,13 @@ export const alertStyles = {
    ═══════════════════════════════════════════════════════════ */
 
 export const WEARABLE_DATA = {
-  spo2: 98,
-  heartRate: 82,
-  temp: 36.6,
-  battery: 72,
+  spo2: 98.2,
+  heartRate: 142,
+  temp: 36.7,
+  battery: 87,
   connected: true,
+  kicks: 3,
+  movement: 40,
 };
 
 /* ═══════════════════════════════════════════════════════════
@@ -135,7 +136,7 @@ export const SESSION_TYPES: SessionType[] = [
 export const SHOP_PLANS = [
   {
     name: "Basic",
-    price: "9,900",
+    price: "12,900",
     period: "/ month",
     desc: "Essential monitoring for healthy pregnancies",
     features: ["Weekly health reports", "Basic exercise guides", "Community access", "Article library", "Email support"],
@@ -166,11 +167,14 @@ export const SHOP_PLANS = [
 export const USER_PROFILE = {
   name: "Amira Khelif",
   email: "amira.khelif@email.com",
+  phone: "+213 555 123 456",
   age: 28,
   bloodType: "O+",
   dueDate: "2026-10-15",
   weight: 65,
   height: 165,
+  allergies: ["None"] as string[],
+  illnesses: ["None"] as string[],
 };
 
 /* ═══════════════════════════════════════════════════════════
@@ -179,8 +183,8 @@ export const USER_PROFILE = {
 
 export const SIDEBAR_TABS: { key: TabKey; label: string; icon: React.ReactNode }[] = [
   { key: "home", label: "Dashboard", icon: <DashboardIcon /> },
+  { key: "timeline", label: "Pregnancy Timeline", icon: <CalendarIcon /> },
   { key: "monitoring", label: "Monitoring", icon: <MonitorIcon /> },
-  { key: "tracker", label: "Tracker", icon: <TrackerIcon /> },
   { key: "booking", label: "Booking", icon: <CalendarIcon /> },
   { key: "shop", label: "Shop", icon: <ShopIcon /> },
   { key: "chat", label: "Chat", icon: <ChatIcon /> },
@@ -195,8 +199,51 @@ export function getInitials(name: string) {
 }
 
 /* ═══════════════════════════════════════════════════════════
-   APPOINTMENT REMINDERS
+   PREGNANCY WEEK SUMMARIES (for sidebar timeline)
    ═══════════════════════════════════════════════════════════ */
+
+export interface WeekSummary {
+  size: string;
+  emoji: string;
+  length: string;
+  weight: string;
+  highlight: string;
+  tip: string;
+  nextMilestone?: string;
+}
+
+const WEEK_SUMMARIES: Record<number, WeekSummary> = {
+  4:  { size: "Poppy Seed",   emoji: "🌱", length: "0.1 cm", weight: "< 1 g",   highlight: "Implantation complete, neural tube forming",       tip: "Start folic acid 400 mcg/day if you haven't already.",       nextMilestone: "Heart starts beating (wk 5)" },
+  5:  { size: "Sesame Seed",  emoji: "🌾", length: "0.4 cm", weight: "< 1 g",   highlight: "Heart begins to beat — a huge milestone!",           tip: "Stay hydrated and rest often — exhaustion is normal.",        nextMilestone: "All major organs present (wk 8)" },
+  6:  { size: "Lentil",       emoji: "🫘", length: "0.6 cm", weight: "< 1 g",   highlight: "Facial features and tiny fingers starting to form",   tip: "Eat small, frequent meals to manage morning sickness.",       nextMilestone: "All major organs present (wk 8)" },
+  7:  { size: "Blueberry",    emoji: "🫐", length: "1.0 cm", weight: "< 1 g",   highlight: "Brain growing rapidly, heart fully divided",          tip: "Ginger tea or crackers can ease nausea — keep some nearby.", nextMilestone: "All major organs present (wk 8)" },
+  8:  { size: "Raspberry",    emoji: "🍇", length: "1.6 cm", weight: "1 g",     highlight: "All major organs are now present",                   tip: "Book your first prenatal appointment if not yet done.",       nextMilestone: "1st trimester complete (wk 12)" },
+  9:  { size: "Grape",        emoji: "🍇", length: "2.3 cm", weight: "2 g",     highlight: "Cartilage and bones forming, baby can flex",          tip: "Fatigue may ease slightly — enjoy any energy boosts.",        nextMilestone: "1st trimester complete (wk 12)" },
+  10: { size: "Kumquat",      emoji: "🍊", length: "3.1 cm", weight: "4 g",     highlight: "All vital organs formed and functioning",             tip: "Schedule your 1st trimester screening scan soon.",            nextMilestone: "1st trimester complete (wk 12)" },
+  11: { size: "Fig",          emoji: "🌿", length: "4.1 cm", weight: "7 g",     highlight: "Baby kicks and stretches, tooth buds forming",        tip: "Nausea often begins to ease this week — enjoy the relief.",   nextMilestone: "1st trimester complete (wk 12)" },
+  12: { size: "Lime",         emoji: "🍋", length: "5.4 cm", weight: "14 g",    highlight: "Reflexes developing, baby opens and closes fists",    tip: "Risk of miscarriage drops sharply after this week.",          nextMilestone: "Feel first movements (wk 16)" },
+  13: { size: "Plum",         emoji: "🍑", length: "7.4 cm", weight: "23 g",    highlight: "Vocal cords forming, fingerprints developing",        tip: "Welcome to the 2nd trimester — energy often returns!",        nextMilestone: "Feel first movements (wk 16)" },
+  14: { size: "Lemon",        emoji: "🍋", length: "8.7 cm", weight: "43 g",    highlight: "Baby squints, frowns and grimaces",                   tip: "You may start showing — embrace your growing bump.",          nextMilestone: "Feel first movements (wk 16)" },
+  16: { size: "Avocado",      emoji: "🥑", length: "11.6 cm", weight: "100 g",  highlight: "Eyes and ears fully formed, baby may hear you",       tip: "Talk or sing to your baby — they can hear you now.",          nextMilestone: "Anatomy scan (wk 20)" },
+  18: { size: "Bell Pepper",  emoji: "🫑", length: "14.2 cm", weight: "190 g",  highlight: "Baby yawns and hiccups in the womb",                  tip: "Schedule your mid-pregnancy anatomy scan (wks 18–20).",       nextMilestone: "Anatomy scan (wk 20)" },
+  20: { size: "Banana",       emoji: "🍌", length: "25.0 cm", weight: "300 g",  highlight: "Halfway there! Baby moves actively, taste buds form", tip: "Start tracking daily kick counts if you haven't already.",    nextMilestone: "3rd trimester begins (wk 28)" },
+  24: { size: "Corn",         emoji: "🌽", length: "30.0 cm", weight: "600 g",  highlight: "Baby's eyes beginning to open, brain growing fast",   tip: "Sleep on your left side to optimise blood flow.",             nextMilestone: "3rd trimester begins (wk 28)" },
+  28: { size: "Eggplant",     emoji: "🍆", length: "37.6 cm", weight: "1.0 kg", highlight: "3rd trimester! Baby can blink and may dream",         tip: "Glucose screening test is usually done this week.",           nextMilestone: "Full term preparation (wk 36)" },
+  32: { size: "Squash",       emoji: "🎃", length: "42.4 cm", weight: "1.7 kg", highlight: "Bones hardening, baby practises breathing",           tip: "Pack your hospital bag — labour can come earlier than expected.", nextMilestone: "Full term preparation (wk 36)" },
+  36: { size: "Honeydew",     emoji: "🍈", length: "47.4 cm", weight: "2.6 kg", highlight: "Nearly full term, baby settles head-down",            tip: "Practise your breathing and relaxation techniques.",          nextMilestone: "Due date (wk 40)" },
+  40: { size: "Watermelon",   emoji: "🍉", length: "51.2 cm", weight: "3.5 kg", highlight: "Fully developed and ready for birth!",                tip: "Watch for signs of labour. You're almost there!",             nextMilestone: undefined },
+};
+
+export function getWeekSummary(week: number): WeekSummary {
+  const keys = Object.keys(WEEK_SUMMARIES).map(Number).sort((a, b) => a - b);
+  let closest = keys[0];
+  for (const k of keys) {
+    if (k <= week) closest = k;
+  }
+  return WEEK_SUMMARIES[closest] || WEEK_SUMMARIES[7];
+}
+
+
 
 export const APPOINTMENT_REMINDERS = [
   {
