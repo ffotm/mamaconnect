@@ -102,14 +102,23 @@ export default function ClientProfileDetails({ onBack, onContinue }: ClientProfi
   const [allergies, setAllergies] = useState<string[]>([]);
   const [pregnancyStage, setPregnancyStage] = useState("");
   const [birthdayError, setBirthdayError] = useState("");
+  const [bloodTypeError, setBloodTypeError] = useState("");
+  const [conditionsError, setConditionsError] = useState("");
+  const [allergiesError, setAllergiesError] = useState("");
   const [pregnancyError, setPregnancyError] = useState("");
 
   function handleSubmit() {
     const bdErr  = birthday       ? "" : "Date of birth is required";
+    const btErr  = bloodType      ? "" : "Blood type is required";
+    const condErr = conditions.length > 0 ? "" : "Please select at least one option";
+    const algErr  = allergies.length > 0  ? "" : "Please select at least one option";
     const pregErr = pregnancyStage ? "" : "Pregnancy date is required";
     setBirthdayError(bdErr);
+    setBloodTypeError(btErr);
+    setConditionsError(condErr);
+    setAllergiesError(algErr);
     setPregnancyError(pregErr);
-    if (bdErr || pregErr) return;
+    if (bdErr || btErr || condErr || algErr || pregErr) return;
     onContinue?.({ birthday, bloodType, conditions, allergies, pregnancyStage });
   }
 
@@ -137,6 +146,7 @@ export default function ClientProfileDetails({ onBack, onContinue }: ClientProfi
             placeholder="Your birthday"
             value={birthday}
             onChange={(e) => { setBirthday(e.target.value); if (birthdayError) setBirthdayError(""); }}
+            required
             className={`w-full rounded-xl border ${birthdayError ? "border-red-400" : "border-gray-200"} h-11 pl-11 pr-4 text-sm text-gray-800 outline-none focus:border-[#F46A6A] focus:ring-1 focus:ring-[#F46A6A]/20 transition-all placeholder:text-gray-300`}
           />
         </div>
@@ -152,8 +162,9 @@ export default function ClientProfileDetails({ onBack, onContinue }: ClientProfi
           </span>
           <select
             value={bloodType}
-            onChange={(e) => setBloodType(e.target.value)}
-            className="w-full rounded-xl border border-gray-200 h-11 pl-11 pr-4 text-sm text-gray-800 outline-none focus:border-[#F46A6A] focus:ring-1 focus:ring-[#F46A6A]/20 transition-all appearance-none bg-white"
+            onChange={(e) => { setBloodType(e.target.value); if (bloodTypeError) setBloodTypeError(""); }}
+            required
+            className={`w-full rounded-xl border ${bloodTypeError ? "border-red-400" : "border-gray-200"} h-11 pl-11 pr-4 text-sm text-gray-800 outline-none focus:border-[#F46A6A] focus:ring-1 focus:ring-[#F46A6A]/20 transition-all appearance-none bg-white`}
           >
             <option value="" disabled>Select blood type</option>
             {BLOOD_TYPE_OPTIONS.map((t) => (
@@ -161,6 +172,7 @@ export default function ClientProfileDetails({ onBack, onContinue }: ClientProfi
             ))}
           </select>
         </div>
+        {bloodTypeError && <p className="text-xs text-red-500 mt-1">{bloodTypeError}</p>}
       </div>
 
       {/* Medical Conditions - Multi Select */}
@@ -169,8 +181,9 @@ export default function ClientProfileDetails({ onBack, onContinue }: ClientProfi
         placeholder="Select your illnesses"
         options={ILLNESS_OPTIONS}
         selected={conditions}
-        onChange={setConditions}
+        onChange={(val) => { setConditions(val); if (conditionsError) setConditionsError(""); }}
         icon={<MedicalIcon />}
+        error={conditionsError}
       />
 
       {/* Allergies - Multi Select */}
@@ -179,8 +192,9 @@ export default function ClientProfileDetails({ onBack, onContinue }: ClientProfi
         placeholder="Select your allergies"
         options={ALLERGY_OPTIONS}
         selected={allergies}
-        onChange={setAllergies}
+        onChange={(val) => { setAllergies(val); if (allergiesError) setAllergiesError(""); }}
         icon={<AllergyIcon />}
+        error={allergiesError}
       />
 
       {/* Pregnancy Stage */}
@@ -195,6 +209,7 @@ export default function ClientProfileDetails({ onBack, onContinue }: ClientProfi
             placeholder="Pregnancy date"
             value={pregnancyStage}
             onChange={(e) => { setPregnancyStage(e.target.value); if (pregnancyError) setPregnancyError(""); }}
+            required
             className={`w-full rounded-xl border ${pregnancyError ? "border-red-400" : "border-gray-200"} h-11 pl-11 pr-4 text-sm text-gray-800 outline-none focus:border-[#F46A6A] focus:ring-1 focus:ring-[#F46A6A]/20 transition-all placeholder:text-gray-300`}
           />
         </div>

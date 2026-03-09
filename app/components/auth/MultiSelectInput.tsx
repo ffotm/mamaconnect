@@ -9,6 +9,7 @@ interface MultiSelectInputProps {
   selected: string[];
   onChange: (selected: string[]) => void;
   icon?: React.ReactNode;
+  error?: string;
 }
 
 export default function MultiSelectInput({
@@ -18,6 +19,7 @@ export default function MultiSelectInput({
   selected,
   onChange,
   icon,
+  error,
 }: MultiSelectInputProps) {
   const [open, setOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -69,7 +71,7 @@ export default function MultiSelectInput({
         <div
           onClick={() => setOpen((v) => !v)}
           className={`w-full min-h-11 rounded-xl border cursor-pointer ${
-            open ? "border-[#F46A6A] ring-1 ring-[#F46A6A]/20" : "border-gray-200"
+            open ? "border-[#F46A6A] ring-1 ring-[#F46A6A]/20" : error ? "border-red-400" : "border-gray-200"
           } ${icon ? "pl-11" : "pl-4"} pr-9 py-2.5 text-sm text-gray-800 outline-none transition-all flex flex-wrap items-center gap-1.5`}
         >
           {selected.length === 0 && (
@@ -143,6 +145,7 @@ export default function MultiSelectInput({
           </div>
         )}
       </div>
+      {error && <p className="text-xs text-red-500 mt-1">{error}</p>}
     </div>
   );
 }
