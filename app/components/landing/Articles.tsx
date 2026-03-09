@@ -1,22 +1,7 @@
 import ArticleCard from "./ArticleCard";
+import { ARTICLES as ALL_ARTICLES } from "@/app/data/articles";
 
-const ARTICLES = [
-  {
-    image: "🤰",
-    title: "First Trimester: What to Expect",
-    preview: "From morning sickness to your first scan, here's everything you need to know about the first 12 weeks of pregnancy.",
-  },
-  {
-    image: "🥗",
-    title: "Nutrition Guide for Expecting Mothers",
-    preview: "Learn which foods to embrace and which to avoid during pregnancy for a healthy you and a healthy baby.",
-  },
-  {
-    image: "🧘‍♀️",
-    title: "Staying Active During Pregnancy",
-    preview: "Safe exercises and gentle routines to keep you energised and comfortable throughout your pregnancy journey.",
-  },
-];
+const LANDING_ARTICLES = ALL_ARTICLES.slice(0, 3);
 
 export default function Articles() {
   return (
@@ -35,8 +20,8 @@ export default function Articles() {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {ARTICLES.map((a) => (
-            <ArticleCard key={a.title} image={a.image} title={a.title} preview={a.preview} />
+          {LANDING_ARTICLES.map((a) => (
+            <ArticleCard key={a.id} id={a.id} image={a.image} title={a.title} preview={a.preview} />
           ))}
         </div>
       </div>
