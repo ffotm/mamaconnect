@@ -168,7 +168,7 @@ export default function ChatSection() {
           </div>
 
           {/* Input area */}
-          <div className="px-5 py-4 border-t border-gray-100">
+          <div className="px-5 pt-3 pb-3 border-t border-gray-100">
             <ChatInput value={input} onChange={setInput} onSend={handleSend} />
           </div>
         </div>
