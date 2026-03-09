@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { getInitials, USER_PROFILE } from "./data";
+import MultiSelectInput from "@/app/components/auth/MultiSelectInput";
 import {
   UserIcon,
   EditIcon,
@@ -58,7 +59,7 @@ function ProfileMenu({ user, onNavigate, onLogout }: {
     <div>
       <div className="px-5 py-4 border-b border-gray-100 bg-gray-50/50">
         <div className="flex items-center gap-3">
-          <div className="w-11 h-11 rounded-full bg-gradient-to-br from-[#F46A6A] to-[#FBC4AB] flex items-center justify-center text-white font-bold text-sm shrink-0">
+          <div className="w-11 h-11 rounded-full bg-linear-to-br from-[#F46A6A] to-[#FBC4AB] flex items-center justify-center text-white font-bold text-sm shrink-0">
             {getInitials(user.name)}
           </div>
           <div className="min-w-0">
@@ -99,29 +100,63 @@ function ProfileMenu({ user, onNavigate, onLogout }: {
 
 /* ── View ── */
 
+const ALLERGY_OPTIONS = [
+  "Medication allergy", "Food allergy", "Latex allergy",
+  "Pollen allergy", "Dust allergy", "None",
+];
+
+const ILLNESS_OPTIONS = [
+  "Diabetes", "Hypertension", "Thyroid disorders",
+  "Asthma", "Heart conditions", "None",
+];
+
+function getBmiCategory(bmi: number) {
+  if (bmi < 18.5) return { label: "Underweight", color: "text-blue-500" };
+  if (bmi < 25)   return { label: "Normal",      color: "text-green-500" };
+  if (bmi < 30)   return { label: "Overweight",  color: "text-yellow-500" };
+  return               { label: "Obese",         color: "text-red-500" };
+}
+
 function ProfileView({ onBack }: { onBack: () => void }) {
+  const bmi = USER_PROFILE.weight / Math.pow(USER_PROFILE.height / 100, 2);
+  const bmiRounded = bmi.toFixed(1);
+  const bmiCat = getBmiCategory(bmi);
+
   return (
     <div>
       <BackHeader title="Profile Information" onBack={onBack} />
       <div className="p-5">
         <div className="flex justify-center mb-4">
-          <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#F46A6A] to-[#FBC4AB] flex items-center justify-center text-white font-bold text-xl">
+          <div className="w-16 h-16 rounded-full bg-linear-to-br from-[#F46A6A] to-[#FBC4AB] flex items-center justify-center text-white font-bold text-xl">
             {getInitials(USER_PROFILE.name)}
           </div>
         </div>
         <div className="space-y-3">
           {[
-            { label: "Name", value: USER_PROFILE.name },
-            { label: "Email", value: USER_PROFILE.email },
-            { label: "Age", value: `${USER_PROFILE.age} years` },
+            { label: "Name",       value: USER_PROFILE.name },
+            { label: "Email",      value: USER_PROFILE.email },
+            { label: "Phone",      value: USER_PROFILE.phone },
+            { label: "Age",        value: `${USER_PROFILE.age} years` },
             { label: "Blood Type", value: USER_PROFILE.bloodType },
-            { label: "Due Date", value: new Date(USER_PROFILE.dueDate).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" }) },
+            { label: "Weight",     value: `${USER_PROFILE.weight} kg` },
+            { label: "Height",     value: `${USER_PROFILE.height} cm` },
+            { label: "Allergies",  value: USER_PROFILE.allergies.join(", ") },
+            { label: "Illnesses",  value: USER_PROFILE.illnesses.join(", ") },
+            { label: "Due Date",   value: new Date(USER_PROFILE.dueDate).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" }) },
           ].map((item) => (
             <div key={item.label} className="flex justify-between items-center py-2 border-b border-gray-50 last:border-0">
               <span className="text-xs text-gray-500">{item.label}</span>
               <span className="text-sm font-medium text-gray-900">{item.value}</span>
             </div>
           ))}
+          {/* BMI row with category badge */}
+          <div className="flex justify-between items-center py-2">
+            <span className="text-xs text-gray-500">BMI</span>
+            <div className="flex items-center gap-2">
+              <span className="text-sm font-medium text-gray-900">{bmiRounded}</span>
+              <span className={`text-xs font-semibold ${bmiCat.color}`}>{bmiCat.label}</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -131,9 +166,24 @@ function ProfileView({ onBack }: { onBack: () => void }) {
 /* ── Edit ── */
 
 function ProfileEdit({ onBack }: { onBack: () => void }) {
-  const [name, setName] = useState(USER_PROFILE.name);
-  const [email, setEmail] = useState(USER_PROFILE.email);
-  const [saved, setSaved] = useState(false);
+  const [name, setName]           = useState(USER_PROFILE.name);
+  const [email, setEmail]         = useState(USER_PROFILE.email);
+  const [phone, setPhone]         = useState(USER_PROFILE.phone);
+  const [bloodType, setBloodType] = useState(USER_PROFILE.bloodType);
+  const [weight, setWeight]       = useState(String(USER_PROFILE.weight));
+  const [height, setHeight]       = useState(String(USER_PROFILE.height));
+  const [allergies, setAllergies] = useState<string[]>(USER_PROFILE.allergies);
+  const [illnesses, setIllnesses] = useState<string[]>(USER_PROFILE.illnesses);
+  const [saved, setSaved]         = useState(false);
+
+  const bmi = Number(weight) && Number(height)
+    ? (Number(weight) / Math.pow(Number(height) / 100, 2)).toFixed(1)
+    : "—";
+  const bmiCat = Number(weight) && Number(height)
+    ? getBmiCategory(Number(weight) / Math.pow(Number(height) / 100, 2))
+    : null;
+
+  const inputCls = "w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#F46A6A]/30 focus:border-[#F46A6A]";
 
   function handleSave() {
     setSaved(true);
@@ -143,25 +193,59 @@ function ProfileEdit({ onBack }: { onBack: () => void }) {
   return (
     <div>
       <BackHeader title="Edit Profile" onBack={onBack} />
-      <div className="p-5 space-y-4">
+      <div className="p-5 space-y-4 max-h-120 overflow-y-auto">
         <div>
           <label className="block text-xs font-medium text-gray-600 mb-1.5">Full Name</label>
-          <input
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#F46A6A]/30 focus:border-[#F46A6A]"
-          />
+          <input type="text" value={name} onChange={(e) => setName(e.target.value)} className={inputCls} />
         </div>
         <div>
           <label className="block text-xs font-medium text-gray-600 mb-1.5">Email</label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#F46A6A]/30 focus:border-[#F46A6A]"
-          />
+          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className={inputCls} />
         </div>
+        <div>
+          <label className="block text-xs font-medium text-gray-600 mb-1.5">Phone Number</label>
+          <input type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} className={inputCls} placeholder="+213 555 123 456" />
+        </div>
+        <div>
+          <label className="block text-xs font-medium text-gray-600 mb-1.5">Blood Type</label>
+          <select value={bloodType} onChange={(e) => setBloodType(e.target.value)} className={inputCls}>
+            {["A+","A−","B+","B−","AB+","AB−","O+","O−"].map((t) => (
+              <option key={t} value={t}>{t}</option>
+            ))}
+          </select>
+        </div>
+        <div className="flex gap-3">
+          <div className="flex-1">
+            <label className="block text-xs font-medium text-gray-600 mb-1.5">Weight (kg)</label>
+            <input type="number" min={30} max={200} value={weight} onChange={(e) => setWeight(e.target.value)} className={inputCls} />
+          </div>
+          <div className="flex-1">
+            <label className="block text-xs font-medium text-gray-600 mb-1.5">Height (cm)</label>
+            <input type="number" min={100} max={250} value={height} onChange={(e) => setHeight(e.target.value)} className={inputCls} />
+          </div>
+        </div>
+        {/* Live BMI display */}
+        <div className="flex items-center justify-between px-3 py-2.5 rounded-xl bg-gray-50 border border-gray-100">
+          <span className="text-xs text-gray-500">BMI</span>
+          <div className="flex items-center gap-2">
+            <span className="text-sm font-semibold text-gray-900">{bmi}</span>
+            {bmiCat && <span className={`text-xs font-semibold ${bmiCat.color}`}>{bmiCat.label}</span>}
+          </div>
+        </div>
+        <MultiSelectInput
+          label="Allergies"
+          placeholder="Select allergies"
+          options={ALLERGY_OPTIONS}
+          selected={allergies}
+          onChange={setAllergies}
+        />
+        <MultiSelectInput
+          label="Illnesses / Conditions"
+          placeholder="Select illnesses"
+          options={ILLNESS_OPTIONS}
+          selected={illnesses}
+          onChange={setIllnesses}
+        />
         <button
           onClick={handleSave}
           className="w-full py-2.5 rounded-xl bg-[#F46A6A] text-white text-sm font-semibold hover:bg-[#e55a5a] transition-colors shadow-sm"
@@ -189,15 +273,15 @@ function ChangePassword({ onBack }: { onBack: () => void }) {
       <div className="p-5 space-y-4">
         <div>
           <label className="block text-xs font-medium text-gray-600 mb-1.5">Current Password</label>
-          <input type="password" placeholder="Enter current password" className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#F46A6A]/30 focus:border-[#F46A6A]" />
+          <input type="password" placeholder="Enter current password" className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#F46A6A]/30 focus:border-[#F46A6A]" />
         </div>
         <div>
           <label className="block text-xs font-medium text-gray-600 mb-1.5">New Password</label>
-          <input type="password" placeholder="Enter new password" className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#F46A6A]/30 focus:border-[#F46A6A]" />
+          <input type="password" placeholder="Enter new password" className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#F46A6A]/30 focus:border-[#F46A6A]" />
         </div>
         <div>
           <label className="block text-xs font-medium text-gray-600 mb-1.5">Confirm New Password</label>
-          <input type="password" placeholder="Confirm new password" className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#F46A6A]/30 focus:border-[#F46A6A]" />
+          <input type="password" placeholder="Confirm new password" className="w-full px-3 py-2.5 rounded-xl border border-gray-200 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#F46A6A]/30 focus:border-[#F46A6A]" />
         </div>
         <button
           onClick={handleSave}
