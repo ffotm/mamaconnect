@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/app/components/auth/AuthContext";
 import { TabKey, Midwife } from "@/app/components/dashboard/data";
@@ -19,12 +19,13 @@ export default function DashboardPage() {
   const [greeting, setGreeting] = useState("Good morning");
   const { user, isLoading, logout } = useAuth();
   const router = useRouter();
+  const loggingOut = useRef(false);
 
   // Booking state lifted here so midwife selection can pass through
   const [bookingMidwife, setBookingMidwife] = useState<Midwife | null>(null);
 
   useEffect(() => {
-    if (!isLoading && !user) {
+    if (!isLoading && !user && !loggingOut.current) {
       router.replace("/auth?mode=login");
     }
   }, [user, isLoading, router]);
@@ -37,6 +38,7 @@ export default function DashboardPage() {
   }, []);
 
   function handleLogout() {
+    loggingOut.current = true;
     logout();
     router.push("/");
   }
